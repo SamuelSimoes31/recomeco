@@ -1,15 +1,38 @@
-import { useRouter } from 'expo-router'
+import { useRouter } from 'expo-router';
+import { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from "react-native";
-import { TextInput, Button} from 'react-native-paper'
+import { TextInput, Button } from 'react-native-paper';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 export default function Page() {
-  const router = useRouter()
+  const [name, setName] = useState('');
+  const router = useRouter();
+
+  useEffect(() => {
+    AsyncStorage.getItem('voluntario', (e,a) => setName(a ?? ''))
+  }, [])
+
   return (
     <View style={styles.container}>
       <View style={styles.main}>
         <Text style={styles.title}>Bem vindo</Text>
-        <TextInput label={'Nome do Voluntário'}/>
-        <Button mode='contained' onPress={() => router.push('/cadastro')}>Prosseguir</Button>
+        <TextInput
+          label={'Nome do Voluntário'}
+          placeholder='Seu nome aqui'
+          value={name}
+          onChangeText={(v) => setName(v)}
+        />
+        <Button
+          disabled={!name}
+          mode='contained'
+          onPress={async () => {
+            AsyncStorage.setItem('voluntario', name)
+            router.push('/cadastro')
+          }}
+        >
+          Prosseguir
+        </Button>
       </View>
     </View>
   );
