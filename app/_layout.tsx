@@ -4,7 +4,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 
 export interface FormContext {
   nome: string
-  idade: number
+  idade: string
   sexo: 'MASCULINO' | 'FEMININO'
   estadoCivil: 'CASADO(A)' | 'SOLTEIRO(A)' | 'VIÚVO(A)'
   telefone1: string

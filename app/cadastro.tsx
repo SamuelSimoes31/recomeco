@@ -7,7 +7,7 @@ import RadioGroup from '../components/RadioGroup';
 import { FormContext } from './_layout';
 
 export default function cadastro() {
-  const { control, handleSubmit, formState, watch, setValue } = useFormContext<FormContext>();
+  const { handleSubmit } = useFormContext<FormContext>();
   const onSubmit = (data: any) => console.log(data);
 
   return (
@@ -29,15 +29,11 @@ export default function cadastro() {
         name='sexo'
         label='SEXO'
         options={['MASCULINO', 'FEMININO']}
-        setValue={setValue}
-        watch={watch}
       />
       <RadioGroup
         name='estadoCivil'
         label='ESTADO CIVIL'
         options={['CASADO(A)', 'SOLTEIRO(A)', 'VIÚVO(A)']}
-        setValue={setValue}
-        watch={watch}
       />
       <Input
         name='telefone1'

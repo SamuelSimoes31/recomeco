@@ -1,19 +1,20 @@
 import React from 'react'
+import { useFormContext } from 'react-hook-form';
 import { View, Text } from 'react-native';
 import { RadioButton } from 'react-native-paper';
+import { FormContext } from '../app/_layout';
 
 interface RadioGroupP {
-  name: string,
+  name: keyof FormContext,
   label: string
-  setValue: any
-  watch: any
   options: string[]
 }
 
-export default function RadioGroup({name, label, setValue, watch, options}: RadioGroupP) {
-
+export default function RadioGroup({name, label, options}: RadioGroupP) {
+  const { setValue, watch } = useFormContext<FormContext>();
+  const value = watch(name)
   return (
-    <RadioButton.Group onValueChange={newValue => setValue(name, newValue)} value={watch(name)}>
+    <RadioButton.Group onValueChange={newValue => setValue(name, newValue)} value={typeof value === 'number' ? String(value) : value}>
     <Text>{label}</Text>
     {options.map(option => (
       <View key={option} style={{ flexDirection: 'row', alignItems: 'center' }}>
