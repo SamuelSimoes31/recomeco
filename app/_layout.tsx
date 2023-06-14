@@ -17,25 +17,29 @@ export interface FormContext {
   celula: string
 }
 
+const theme = {
+  ...DefaultTheme,
+  colors: {
+    primary: '#db4437',
+    onPrimary: "#ffffff",
+    surfaceDisabled: "#201a191e",
+    onSurfaceDisabled: "#201a1960",
+  }
+}
+
 export default function Layout() {
   const methods = useForm<FormContext>({
     defaultValues: {
-
+      telefone1: '819',
+      telefone2: 'Não',
+      cidade: 'Cabo de St. Agostinho'
     },
     reValidateMode: 'onChange',
   })
 
   return (
     <FormProvider {...methods}>
-      <PaperProvider theme={{
-        ...DefaultTheme,
-        colors: {
-          primary: '#db4437',
-          onPrimary: "#ffffff",
-          surfaceDisabled: "#201a191e",
-          onSurfaceDisabled: "#201a1960",
-        }
-      }}>
+      <PaperProvider >
         <Stack screenOptions={{
           headerShown: false,
           contentStyle: {

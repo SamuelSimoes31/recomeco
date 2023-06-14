@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View, ViewProps } from "react-native";
 import { Controller, ControllerProps, useFormContext } from "react-hook-form";
-import { TextInput, TextInputProps } from 'react-native-paper';
+import { TextInput, TextInputProps, HelperText } from 'react-native-paper';
 import { FormContext } from '../app/_layout';
 
 type InputP = Omit<ControllerProps<FormContext>, 'render'> & TextInputProps & {
@@ -30,7 +30,7 @@ export default function Input({ containerStyle, name, rules, defaultValue, shoul
           />
         )}
       />
-      {errors[name]?.message && <Text style={{color: 'red'}}>{errors[name]?.message}</Text>}
+      <HelperText visible={!!errors[name]?.message } type='error'>{errors[name]?.message}</HelperText>
     </View>
   );
 }
