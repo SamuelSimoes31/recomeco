@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react';
 import { Text, View, ViewProps } from "react-native";
-import { useForm, Controller, ControllerProps, FormState } from "react-hook-form";
+import { Controller, ControllerProps, FormState, useFormContext } from "react-hook-form";
 import { TextInput, TextInputProps } from 'react-native-paper';
+import { FormContext } from '../app/_layout';
 
-type InputP = Omit<ControllerProps, 'render'> & TextInputProps & {
+type InputP = Omit<ControllerProps<FormContext>, 'render'> & TextInputProps & {
   containerStyle?: ViewProps['style'];
-  formState: FormState<any>
 };
 
-export default function Input({ containerStyle, name, rules, defaultValue, formState, control, shouldUnregister,...rest }: InputP) {
-  // const { control, handleSubmit, formState, register } = useForm();
+export default function Input({ containerStyle, name, rules, defaultValue, shouldUnregister,...rest }: InputP) {
+  const { control, handleSubmit, formState, register } = useFormContext<FormContext>();
   const { errors } = formState
 
   useEffect
@@ -25,13 +25,13 @@ export default function Input({ containerStyle, name, rules, defaultValue, formS
           <TextInput
             onBlur={onBlur}
             onChangeText={onChange}
-            value={value}
+            value={typeof value === 'number' ? String(value) : value}
             mode='outlined'
             {...rest}
           />
         )}
       />
-      {errors.firstName && <Text>This is required.</Text>}
+      {errors[name]?.message && <Text style={{color: 'red'}}>{errors[name]?.message}</Text>}
     </View>
   );
 }

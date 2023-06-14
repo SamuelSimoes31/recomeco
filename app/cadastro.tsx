@@ -1,32 +1,13 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { useForm, Controller } from "react-hook-form";
+import { StyleSheet, View } from 'react-native';
+import { useFormContext } from "react-hook-form";
 import Input from '../components/Input';
-import { Button, RadioButton, TextInput } from 'react-native-paper';
+import { Button } from 'react-native-paper';
 import RadioGroup from '../components/RadioGroup';
-
-interface FormValues {
-  nome: string;
-  idade: number;
-  sexo: string;
-  estadoCivil: string;
-  telefone1: string;
-  telefone2: string;
-  rua: string
-  bairro: string
-  cidade: string
-  email: string
-  redeSocial: string
-  celula: string
-}
+import { FormContext } from './_layout';
 
 export default function cadastro() {
-  const { control, handleSubmit, formState, watch, setValue } = useForm<FormValues>({
-    defaultValues: {
-      telefone1: '819',
-      telefone2: 'Não'
-    }
-  });
+  const { control, handleSubmit, formState, watch, setValue } = useFormContext<FormContext>();
   const onSubmit = (data: any) => console.log(data);
 
   return (
@@ -34,14 +15,15 @@ export default function cadastro() {
       <Input
         name='nome'
         label={'NOME COMPLETO'}
-        control={control as any}
-        formState={formState}
+        placeholder='insira um valor'
+        rules={{
+          required: {value: true, message: 'Esse campo é obrigatório'}
+        }}
       />
       <Input
         name='idade'
         label={'Idade'}
-        control={control as any}
-        formState={formState}
+        keyboardType='number-pad'
       />
       <RadioGroup
         name='sexo'
@@ -60,14 +42,10 @@ export default function cadastro() {
       <Input
         name='telefone1'
         label={'Telefone 1'}
-        control={control as any}
-        formState={formState}
       />
       <Input
         name='telefone2'
         label={'Telefone 2'}
-        control={control as any}
-        formState={formState}
       />
       <Button mode='contained' onPress={handleSubmit(onSubmit)} >Submit</Button>
 
