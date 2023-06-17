@@ -34,7 +34,7 @@ export const AppFormContextProvider= ({children}: {children: any}) => {
     reValidateMode: 'onChange',
   })
 
-  console.log(methods.watch())
+  // console.log(methods.watch())
 
   return (
     <FormProvider {...methods}>
