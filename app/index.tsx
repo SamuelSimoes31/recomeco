@@ -1,7 +1,7 @@
 import { useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
-import { StyleSheet, Text, View } from "react-native";
-import { TextInput, Button } from 'react-native-paper';
+import { StyleSheet, View } from "react-native";
+import { TextInput, Button, Text } from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
@@ -16,7 +16,7 @@ export default function Page() {
   return (
     <View style={styles.container}>
       <View style={styles.main}>
-        <Text style={styles.title}>Bem vindo</Text>
+        <Text variant='headlineLarge'>Bem vindo</Text>
         <TextInput
           label={'Nome do Voluntário'}
           placeholder='Seu nome aqui'
