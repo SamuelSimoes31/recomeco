@@ -1,16 +1,19 @@
 import React from 'react';
 import { Text, View, ViewProps } from "react-native";
-import { Controller, ControllerProps, useFormContext } from "react-hook-form";
+import { ArrayPath, Controller, ControllerProps, FieldArrayPath, FieldPath, FieldPathByValue, FieldPathValues, useFormContext } from "react-hook-form";
 import { TextInput, TextInputProps, HelperText } from 'react-native-paper';
-import { FormContext } from '../app/_layout';
+import { getDeepVal } from '../utils/form';
+import { FormContext } from '../hooks/FormContext';
 
-type InputP = Omit<ControllerProps<FormContext>, 'render'> & TextInputProps & {
+type InputP = Omit<ControllerProps<FormContext>, 'render' | 'name'> & TextInputProps & {
   containerStyle?: ViewProps['style'];
+  name: FieldPathByValue<FormContext, string>
 };
 
 export default function Input({ containerStyle, name, rules, defaultValue, shouldUnregister,...rest }: InputP) {
   const { control, formState } = useFormContext<FormContext>();
   const { errors } = formState
+  const error = getDeepVal(errors, name)
 
   return (
     <View style={containerStyle}>
@@ -24,13 +27,13 @@ export default function Input({ containerStyle, name, rules, defaultValue, shoul
           <TextInput
             onBlur={onBlur}
             onChangeText={onChange}
-            value={typeof value === 'number' ? String(value) : value}
+            value={value as string}
             mode='outlined'
             {...rest}
           />
         )}
       />
-      <HelperText visible={!!errors[name]?.message } type='error'>{errors[name]?.message}</HelperText>
+      <HelperText visible={!!error } type='error'>{error?.message}</HelperText>
     </View>
   );
 }

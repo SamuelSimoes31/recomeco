@@ -4,7 +4,7 @@ import { useFormContext } from "react-hook-form";
 import Input from '../components/Input';
 import { Button } from 'react-native-paper';
 import RadioGroup from '../components/RadioGroup';
-import { FormContext } from './_layout';
+import { FormContext } from '../hooks/FormContext';
 
 export default function cadastro() {
   const { handleSubmit } = useFormContext<FormContext>();
@@ -13,7 +13,7 @@ export default function cadastro() {
   return (
     <View style={styles.container}>
       <Input
-        name='nome'
+        name='vida.nome'
         label={'NOME COMPLETO'}
         placeholder='insira um valor'
         rules={{
@@ -21,26 +21,26 @@ export default function cadastro() {
         }}
       />
       <Input
-        name='idade'
+        name='vida.idade'
         label={'Idade'}
         keyboardType='number-pad'
       />
       <RadioGroup
-        name='sexo'
+        name='vida.sexo'
         label='SEXO'
         options={['MASCULINO', 'FEMININO']}
       />
       <RadioGroup
-        name='estadoCivil'
+        name='vida.estadoCivil'
         label='ESTADO CIVIL'
         options={['CASADO(A)', 'SOLTEIRO(A)', 'VIÚVO(A)']}
       />
       <Input
-        name='telefone1'
+        name='vida.telefone1'
         label={'Telefone 1'}
       />
       <Input
-        name='telefone2'
+        name='vida.telefone2'
         label={'Telefone 2'}
       />
       <Button mode='contained' onPress={handleSubmit(onSubmit)} >Submit</Button>
