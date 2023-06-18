@@ -1,5 +1,5 @@
 import { useRouter } from 'expo-router';
-import { StyleSheet, View } from "react-native";
+import { Image, StyleSheet, View } from "react-native";
 import { Button, Text } from 'react-native-paper';
 import Input from '../components/Input';
 import Dropdown from '../components/DropDown';
@@ -14,7 +14,10 @@ export default function Page() {
 
   return (
     <View style={[defaultStyles.container, styles.main]}>
-      <Text variant='headlineLarge'>Bem vindo</Text>
+      <View style={{alignItems: 'center', gap: 36, margin: 24}}>
+        <Image source={require('../assets/logo-nome.jpeg')} />
+        <Text variant='headlineLarge'>Bem vindo</Text>
+      </View>
       <View style={{marginVertical: 36}}>
         <Input
           name='voluntario.nome'
@@ -46,6 +49,6 @@ export default function Page() {
 
 const styles = StyleSheet.create({
   main: {
-    justifyContent: 'flex-end'
+    justifyContent: 'flex-end',
   },
 });
