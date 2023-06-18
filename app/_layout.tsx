@@ -5,6 +5,7 @@ import { AppFormContextProvider } from '../hooks/FormContext';
 const theme = {
   ...DefaultTheme,
   colors: {
+    ...DefaultTheme['colors'],
     primary: '#db4437',
     onPrimary: "#ffffff",
     surfaceDisabled: "#201a191e",
@@ -15,7 +16,7 @@ const theme = {
 export default function Layout() {
   return (
     <AppFormContextProvider>
-      <PaperProvider >
+      <PaperProvider theme={theme} >
         <Stack screenOptions={{
           headerShown: false,
           contentStyle: {
