@@ -12,9 +12,19 @@ type InputP =
     containerStyle?: ViewProps['style'];
     name: FieldPathByValue<FormContext, string>;
     MMKVKey?: FieldPathByValue<FormContext, string> | string;
+    required?: boolean;
   };
 
-export default function Input({ containerStyle, name, rules, defaultValue, shouldUnregister, MMKVKey, ...rest }: InputP) {
+export default function Input({
+  containerStyle,
+  name,
+  rules,
+  defaultValue,
+  shouldUnregister,
+  MMKVKey,
+  required,
+  ...rest
+}: InputP) {
   const { control, formState } = useFormContext<FormContext>();
   const error = getDeepVal(formState.errors, name);
 
@@ -23,7 +33,10 @@ export default function Input({ containerStyle, name, rules, defaultValue, shoul
       <Controller
         name={name}
         control={control}
-        rules={rules}
+        rules={{
+          ...rules as any,
+          required: required ? {value: true, message: 'Esse campo é obrigatório'} : rules?.required,
+        }}
         defaultValue={defaultValue}
         shouldUnregister={shouldUnregister}
         render={({ field: { onChange, onBlur, value } }) => (

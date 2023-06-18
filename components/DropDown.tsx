@@ -13,9 +13,10 @@ type DropdownP =
     containerStyle?: ViewProps['style'];
     name: FieldPathByValue<FormContext, string>;
     MMKVKey?: FieldPathByValue<FormContext, string> | string;
+    required?: boolean;
   };
 
-export default function Dropdown({ containerStyle, name, rules, defaultValue, shouldUnregister, MMKVKey, ...props }: DropdownP) {
+export default function Dropdown({ containerStyle, name, rules, defaultValue, shouldUnregister, MMKVKey, required, ...props }: DropdownP) {
   const { control, formState } = useFormContext<FormContext>();
   const [showDropDown, setShowDropDown] = useState(false);
   const error = getDeepVal(formState.errors, name);
@@ -24,8 +25,11 @@ export default function Dropdown({ containerStyle, name, rules, defaultValue, sh
       <Controller
         name={name}
         control={control}
-        rules={rules}
-        defaultValue={defaultValue}
+        rules={{
+          ...rules as any,
+          required: required ? {value: true, message: 'Esse campo é obrigatório'} : rules?.required,
+        }}
+        defaultValue={defaultValue as string}
         shouldUnregister={shouldUnregister}
         render={({ field: { onChange, onBlur, value } }) => (
           <DropDown

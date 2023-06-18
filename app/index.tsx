@@ -3,10 +3,13 @@ import { StyleSheet, View } from "react-native";
 import { Button, Text } from 'react-native-paper';
 import Input from '../components/Input';
 import Dropdown from '../components/DropDown';
+import { useFormContext } from 'react-hook-form';
+import { FormContext } from '../hooks/FormContext';
 
 
 export default function Page() {
   const router = useRouter();
+  const {handleSubmit} = useFormContext<FormContext>()
 
   return (
     <View style={styles.container}>
@@ -17,19 +20,21 @@ export default function Page() {
           label={'Nome do Voluntário'}
           placeholder='insira o nome'
           MMKVKey='voluntario.nome'
+          required
         />
         <Dropdown
           name='voluntario.campus'
           list={[{value: 'CABO', label: 'CABO'}]}
           label='Aaa'
           MMKVKey='voluntario.campus'
+          required
         />
         <Button
-          // disabled={!name}
+          // disabled={!formState.isValid}
           mode='contained'
-          onPress={async () => {
+          onPress={handleSubmit(() => {
             router.push('/cadastro')
-          }}
+          })}
         >
           Prosseguir
         </Button>
