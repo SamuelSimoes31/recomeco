@@ -1,4 +1,5 @@
 import { FormProvider, useForm } from 'react-hook-form';
+import { MMKVGetFormString, storage } from '../clients/mmkv';
 
 export interface FormContext {
   voluntario: {
@@ -25,6 +26,10 @@ export interface FormContext {
 export const AppFormContextProvider= ({children}: {children: any}) => {
   const methods = useForm<FormContext>({
     defaultValues: {
+      voluntario: {
+        nome: MMKVGetFormString('voluntario.nome'),
+        campus: MMKVGetFormString('voluntario.campus'),
+      },
       vida: {
         telefone1: '819',
         telefone2: 'Não',

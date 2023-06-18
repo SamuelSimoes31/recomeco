@@ -23,7 +23,7 @@ export default function Input({ containerStyle, name, rules, defaultValue, shoul
         name={name}
         control={control}
         rules={rules}
-        defaultValue={MMKVKey ? storage.getString(MMKVKey) : defaultValue}
+        defaultValue={defaultValue}
         shouldUnregister={shouldUnregister}
         render={({ field: { onChange, onBlur, value } }) => (
           <TextInput
