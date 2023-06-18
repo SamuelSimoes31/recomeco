@@ -24,6 +24,7 @@ export interface FormContext {
 }
 
 export const AppFormContextProvider= ({children}: {children: any}) => {
+  // storage.clearAll()
   const methods = useForm<FormContext>({
     defaultValues: {
       voluntario: {
@@ -40,6 +41,7 @@ export const AppFormContextProvider= ({children}: {children: any}) => {
   })
 
   // console.log(methods.watch())
+  // console.log(methods.formState.errors)
 
   return (
     <FormProvider {...methods}>
