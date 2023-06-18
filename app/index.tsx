@@ -2,16 +2,11 @@ import { useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { StyleSheet, View } from "react-native";
 import { TextInput, Button, Text } from 'react-native-paper';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 export default function Page() {
   const [name, setName] = useState('');
   const router = useRouter();
-
-  useEffect(() => {
-    AsyncStorage.getItem('voluntario', (e,a) => setName(a ?? ''))
-  }, [])
 
   return (
     <View style={styles.container}>
@@ -27,7 +22,6 @@ export default function Page() {
           disabled={!name}
           mode='contained'
           onPress={async () => {
-            AsyncStorage.setItem('voluntario', name)
             router.push('/cadastro')
           }}
         >
