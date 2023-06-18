@@ -5,61 +5,47 @@ import Input from '../components/Input';
 import Dropdown from '../components/DropDown';
 import { useFormContext } from 'react-hook-form';
 import { FormContext } from '../hooks/FormContext';
+import { defaultStyles } from '../utils/styles';
 
 
 export default function Page() {
   const router = useRouter();
-  const {handleSubmit} = useFormContext<FormContext>()
+  const { handleSubmit } = useFormContext<FormContext>();
 
   return (
-    <View style={styles.container}>
-      <View style={styles.main}>
-        <Text variant='headlineLarge'>Bem vindo</Text>
+    <View style={[defaultStyles.container, styles.main]}>
+      <Text variant='headlineLarge'>Bem vindo</Text>
+      <View style={{marginVertical: 36}}>
         <Input
           name='voluntario.nome'
           label={'Nome do Voluntário'}
-          placeholder='insira o nome'
+          placeholder='Insira seu nome'
           MMKVKey='voluntario.nome'
           required
         />
         <Dropdown
           name='voluntario.campus'
-          list={[{value: 'CABO', label: 'CABO'}]}
-          label='Aaa'
+          list={[{ value: 'Campus Cabo', label: 'Campus Cabo' }]}
+          label='Campus'
           MMKVKey='voluntario.campus'
+          placeholder='Em qual campus está servindo?'
           required
         />
-        <Button
-          // disabled={!formState.isValid}
-          mode='contained'
-          onPress={handleSubmit(() => {
-            router.push('/cadastro')
-          })}
-        >
-          Prosseguir
-        </Button>
       </View>
+      <Button
+        mode='contained'
+        onPress={handleSubmit(() => {
+          router.push('/cadastro');
+        })}
+      >
+        Prosseguir
+      </Button>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'flex-end',
-    alignItems: "center",
-    padding: 24,
-  },
   main: {
-    flex: 1,
-    justifyContent: "space-between",
-    alignContent: 'center',
-    width: '100%',
-    maxHeight: '60%',
-    marginHorizontal: "auto",
-  },
-  title: {
-    fontSize: 36,
-    fontWeight: "bold",
+    justifyContent: 'flex-end'
   },
 });
