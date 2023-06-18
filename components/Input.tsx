@@ -6,16 +6,17 @@ import { getDeepVal } from '../utils/form';
 import { FormContext } from '../hooks/FormContext';
 import { storage } from '../clients/mmkv';
 
-type InputP = Omit<ControllerProps<FormContext>, 'render' | 'name'> & TextInputProps & {
-  containerStyle?: ViewProps['style'];
-  name: FieldPathByValue<FormContext, string>
-  MMKVKey?: FieldPathByValue<FormContext, string> | string
-};
+type InputP =
+  Omit<ControllerProps<FormContext>, 'render' | 'name'> &
+  TextInputProps & {
+    containerStyle?: ViewProps['style'];
+    name: FieldPathByValue<FormContext, string>;
+    MMKVKey?: FieldPathByValue<FormContext, string> | string;
+  };
 
 export default function Input({ containerStyle, name, rules, defaultValue, shouldUnregister, MMKVKey, ...rest }: InputP) {
   const { control, formState } = useFormContext<FormContext>();
-  const { errors } = formState
-  const error = getDeepVal(errors, name)
+  const error = getDeepVal(formState.errors, name);
 
   return (
     <View style={containerStyle}>
@@ -29,10 +30,10 @@ export default function Input({ containerStyle, name, rules, defaultValue, shoul
           <TextInput
             onBlur={onBlur}
             onChangeText={text => {
-              if (MMKVKey){
-                storage.set(MMKVKey, text)
+              if (MMKVKey) {
+                storage.set(MMKVKey, text);
               }
-              onChange(text)
+              onChange(text);
             }}
             value={value as string}
             mode='outlined'
@@ -40,7 +41,7 @@ export default function Input({ containerStyle, name, rules, defaultValue, shoul
           />
         )}
       />
-      <HelperText visible={!!error } type='error'>{error?.message}</HelperText>
+      <HelperText visible={!!error} type='error'>{error?.message}</HelperText>
     </View>
   );
 }
