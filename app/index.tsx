@@ -1,8 +1,8 @@
 import { useRouter } from 'expo-router';
-import { useEffect, useState } from 'react';
 import { StyleSheet, View } from "react-native";
-import { TextInput, Button, Text } from 'react-native-paper';
+import { Button, Text } from 'react-native-paper';
 import Input from '../components/Input';
+import Dropdown from '../components/DropDown';
 
 
 export default function Page() {
@@ -17,6 +17,12 @@ export default function Page() {
           label={'Nome do Voluntário'}
           placeholder='insira o nome'
           MMKVKey='voluntario.nome'
+        />
+        <Dropdown
+          name='voluntario.campus'
+          list={[{value: 'CABO', label: 'CABO'}]}
+          label='Aaa'
+          MMKVKey='voluntario.campus'
         />
         <Button
           // disabled={!name}
