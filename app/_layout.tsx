@@ -18,10 +18,10 @@ export default function Layout() {
     <AppFormContextProvider>
       <PaperProvider theme={theme} >
         <Stack screenOptions={{
-          headerShown: false,
           contentStyle: {
             backgroundColor: 'white'
-          }
+          },
+          headerTitleAlign: 'center'
         }} />
       </PaperProvider>
     </AppFormContextProvider>

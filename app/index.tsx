@@ -1,4 +1,4 @@
-import { useRouter } from 'expo-router';
+import { Stack, useRouter } from 'expo-router';
 import { Image, StyleSheet, View } from "react-native";
 import { Button, Text } from 'react-native-paper';
 import Input from '../components/Input';
@@ -14,6 +14,7 @@ export default function Page() {
 
   return (
     <View style={[defaultStyles.container, styles.main]}>
+       <Stack.Screen options={{ headerShown: false }} />
       <View style={{alignItems: 'center', gap: 36, margin: 24}}>
         <Image source={require('../assets/logo-nome.jpeg')} />
         <Text variant='headlineLarge'>Bem vindo</Text>
@@ -38,7 +39,7 @@ export default function Page() {
       <Button
         mode='contained'
         onPress={handleSubmit(() => {
-          router.push('/cadastro');
+          router.push('/vidas');
         })}
       >
         Prosseguir

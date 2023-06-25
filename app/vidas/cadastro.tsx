@@ -1,10 +1,10 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useFormContext } from "react-hook-form";
-import Input from '../components/Input';
+import Input from '../../components/Input';
 import { Button } from 'react-native-paper';
-import RadioGroup from '../components/RadioGroup';
-import { FormContext } from '../hooks/FormContext';
+import RadioGroup from '../../components/RadioGroup';
+import { FormContext } from '../../hooks/FormContext';
 
 export default function cadastro() {
   const { handleSubmit } = useFormContext<FormContext>();
