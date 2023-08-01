@@ -7,7 +7,7 @@ const theme = {
   colors: {
     ...DefaultTheme['colors'],
     primary: '#db4437',
-    onPrimary: "#ffffff",
+    onPrimary: "#eee",
     surfaceDisabled: "#201a191e",
     onSurfaceDisabled: "#201a1960",
   }
