@@ -5,12 +5,14 @@ import { FormContext } from '../../hooks/FormContext';
 import { defaultStyles } from '../../utils/styles';
 import { Avatar, Divider, FAB, Text, TouchableRipple, useTheme } from 'react-native-paper';
 import FooterButtons from '../../components/FooterButtons';
+import { useState } from 'react';
 
 
 export default function Page() {
   const router = useRouter();
-  const { handleSubmit } = useFormContext<FormContext>();
+  const { setValue, watch } = useFormContext<FormContext>();
   const theme = useTheme();
+  const culto = watch('voluntario.culto')
 
   return (
     <View style={{flex: 1}}>
@@ -23,14 +25,16 @@ export default function Page() {
       <FooterButtons
         buttons={[
           {
-            title: 'Aa',
-            icon: 'aa',
+            title: culto ? `Servindo no ${culto}` : 'Qual culto você está servindo?',
             flex: 3,
-            onPress: () => null
+            onPress: () => setValue('voluntario.culto', 'CONNECT'),
+            style: {flexDirection: 'row', gap: 8, justifyContent: 'flex-start'},
+            children: culto ? <Avatar.Image size={54} source={require('../../assets/cultos/connect.jpeg')} /> : <Avatar.Text size={54} label=''  />
           },
           {
+            disabled: !culto,
             title: 'Nova vida',
-            icon: 'bb',
+            icon: 'user-plus',
             onPress: () => null
           }
         ]}
