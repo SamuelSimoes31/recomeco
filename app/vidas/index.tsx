@@ -27,7 +27,7 @@ export default function Page() {
           {
             title: culto ? `Servindo no ${culto}` : 'Qual culto você está servindo?',
             flex: 3,
-            onPress: () => setValue('voluntario.culto', 'CONNECT'),
+            onPress: () => router.push('/culto'),
             style: {flexDirection: 'row', gap: 8, justifyContent: 'flex-start'},
             children: culto ? <Avatar.Image size={54} source={require('../../assets/cultos/connect.jpeg')} /> : <Avatar.Text size={54} label=''  />
           },
