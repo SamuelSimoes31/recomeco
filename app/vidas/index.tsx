@@ -6,6 +6,7 @@ import { defaultStyles } from '../../utils/styles';
 import { Avatar, Divider, FAB, Text, TouchableRipple, useTheme } from 'react-native-paper';
 import FooterButtons from '../../components/FooterButtons';
 import { useState } from 'react';
+import { cultos } from '../../utils/constants';
 
 
 export default function Page() {
@@ -13,6 +14,7 @@ export default function Page() {
   const { setValue, watch } = useFormContext<FormContext>();
   const theme = useTheme();
   const culto = watch('voluntario.culto')
+  const img = cultos.find(e => e.nome === culto)?.imagem ?? require('../../assets/logo-nome.jpeg')
 
   return (
     <View style={{flex: 1}}>
@@ -29,7 +31,7 @@ export default function Page() {
             flex: 3,
             onPress: () => router.push('/culto'),
             style: {flexDirection: 'row', gap: 8, justifyContent: 'flex-start'},
-            children: culto ? <Avatar.Image size={54} source={require('../../assets/cultos/connect.jpeg')} /> : <Avatar.Text size={54} label=''  />
+            children: culto ? <Avatar.Image size={54} source={img} /> : <Avatar.Text size={54} label=''  />
           },
           {
             disabled: !culto,
