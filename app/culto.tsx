@@ -4,7 +4,7 @@ import { Button, Card, Text } from 'react-native-paper';
 import { useFormContext } from 'react-hook-form';
 import { FormContext } from '../hooks/FormContext';
 import { defaultStyles } from '../utils/styles';
-import { cultos } from '../utils/constants';
+import { CULTOS } from '../utils/constants';
 import { ScrollView } from 'react-native-gesture-handler';
 import Input from '../components/Input';
 import { useEffect } from 'react';
@@ -29,15 +29,15 @@ export default function Page() {
       <ScrollView>
 
       <View style={{ flexDirection: 'row', flex: 1, gap: 16, flexWrap: 'wrap', paddingBottom: 24 }}>
-        {cultos.map(culto => (
-          <Card theme={{ roundness: 2 }} key={culto.valor} onPress={() => onSelect(culto.nome)} style={styles.cardContainer}>
+        {CULTOS.map(culto => (
+          <Card theme={{ roundness: 2 }} key={culto.nome} onPress={() => onSelect(culto.nome)} style={styles.cardContainer}>
             <Card.Cover theme={{ roundness: 2 }} resizeMode='contain' source={culto.imagem} />
             <Card.Content style={{ alignItems: 'center', paddingBottom: 4 }}>
               <Text variant="titleMedium">{culto.nome}</Text>
             </Card.Content>
           </Card>
         ))}
-        {cultos.length % 2 === 1 && <View style={styles.cardContainer} />}
+        {CULTOS.length % 2 === 1 && <View style={styles.cardContainer} />}
       </View>
       <Input
         label='Outro culto'
