@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, ViewProps } from "react-native";
 import { Controller, ControllerProps, FieldPathByValue, useFormContext } from "react-hook-form";
-import { TextInput, TextInputProps, HelperText } from 'react-native-paper';
+import { TextInput, TextInputProps, HelperText, useTheme } from 'react-native-paper';
 import { getDeepVal } from '../utils/form';
 import { FormContext } from '../hooks/FormContext';
 import { storage } from '../clients/mmkv';
@@ -27,6 +27,7 @@ export default function Input({
 }: InputP) {
   const { control, formState } = useFormContext<FormContext>();
   const error = getDeepVal(formState.errors, name);
+  const theme = useTheme();
 
   return (
     <View style={containerStyle}>
@@ -41,6 +42,7 @@ export default function Input({
         shouldUnregister={shouldUnregister}
         render={({ field: { onChange, onBlur, value } }) => (
           <TextInput
+            outlineStyle={!!error ? {borderColor: theme.colors.error, borderWidth: 3} : undefined}
             onBlur={onBlur}
             onChangeText={text => {
               if (MMKVKey) {

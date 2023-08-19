@@ -37,7 +37,7 @@ export default function Page() {
             disabled: !culto,
             title: 'Nova vida',
             icon: 'user-plus',
-            onPress: () => null
+            onPress: () => router.push('/vidas/cadastro')
           }
         ]}
       />

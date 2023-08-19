@@ -20,6 +20,7 @@ export interface FormContext {
     email: string
     redeSocial: string
     celula: string
+    observacoes: string
   }
 }
 
