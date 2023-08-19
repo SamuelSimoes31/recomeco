@@ -15,7 +15,7 @@ export const CULTOS : Culto[] = [
     imagem: require(`../assets/cultos/domingo-1930.jpeg`),
   },
   {
-    nome: 'Quarta',
+    nome: 'Culto da Quarta',
     imagem: require(`../assets/cultos/quarta.jpeg`),
   },
   {
@@ -37,5 +37,8 @@ export const CULTOS : Culto[] = [
   {
     nome: 'Connect',
     imagem: require(`../assets/cultos/connect.jpeg`),
+  },{
+    nome: 'Up',
+    imagem: require(`../assets/cultos/up.jpeg`),
   },
 ]
