@@ -7,10 +7,15 @@ import RadioGroup from '../../components/RadioGroup';
 import { FormContext } from '../../hooks/FormContext';
 import { ScrollView } from 'react-native-gesture-handler';
 import { defaultStyles } from '../../utils/styles';
+import { useRouter } from 'expo-router';
 
 export default function cadastro() {
+  const router = useRouter();
   const { handleSubmit } = useFormContext<FormContext>();
-  const onSubmit = (data: any) => console.log(data);
+  const onSubmit = (data: any) => {
+    console.log(data)
+    router.back()
+  };
 
   return (
     <ScrollView>
@@ -54,9 +59,9 @@ export default function cadastro() {
           name='vida.telefone2'
           label={'Telefone 1'}
           keyboardType='number-pad'
-          rules={{
-            minLength: {value: 11, message: 'Número deve ter 11 caracteres'},
-          }}
+          // rules={{
+          //   minLength: {value: 11, message: 'Número deve ter 11 caracteres'},
+          // }}
           maxLength={11}
         />
         <Input
@@ -100,7 +105,7 @@ export default function cadastro() {
           label={'OBSERVAÇÕES'}
           placeholder='Insira um valor'
         />
-        <Button mode='contained' style={{marginTop: 24}} onPress={handleSubmit(onSubmit)} >Submit</Button>
+        <Button mode='contained' style={{marginTop: 24}} onPress={handleSubmit(onSubmit)} >Enviar</Button>
 
       </View>
     </ScrollView>
