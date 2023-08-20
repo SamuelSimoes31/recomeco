@@ -3,7 +3,7 @@ import { ScrollView, StyleSheet, View, Image } from "react-native";
 import { useFormContext } from 'react-hook-form';
 import { FormContext } from '../../hooks/FormContext';
 import { defaultStyles } from '../../utils/styles';
-import { Avatar, Divider, FAB, Text, TouchableRipple, useTheme } from 'react-native-paper';
+import { Avatar, Button, Card, Divider, FAB, IconButton, Text, TouchableRipple, useTheme } from 'react-native-paper';
 import FooterButtons from '../../components/FooterButtons';
 import { useEffect, useState } from 'react';
 import { CULTOS } from '../../utils/constants';
@@ -24,9 +24,17 @@ export default function Page() {
       <ScrollView style={{flex: 1}}>
         <View style={[defaultStyles.container, {justifyContent: 'flex-end'}]}>
           <Stack.Screen options={{ title: "Vidas" }} />
-          {vidas.map(v => (
-            <Text key={v.id}>{v.vida.nome}</Text>
-          ))}
+          <View style={{gap: 8}}>
+            {vidas.map(v => (
+              <Card key={v.id}>
+                <Card.Content style={{flexDirection: 'row', alignItems: 'center', gap: 8}}>
+                  <Text style={{marginRight: 'auto'}}>{v.vida.nome}</Text>
+                  <IconButton mode='contained' icon='account-tie' onPress={() => null}/>
+                  <IconButton mode='contained' icon='form-select'  onPress={() => null}/>
+                </Card.Content>
+              </Card>
+            ))}
+          </View>
         </View>
       </ScrollView>
       {/* <Divider bold /> */}
