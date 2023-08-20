@@ -5,9 +5,10 @@ import { FormContext } from '../../hooks/FormContext';
 import { defaultStyles } from '../../utils/styles';
 import { Avatar, Divider, FAB, Text, TouchableRipple, useTheme } from 'react-native-paper';
 import FooterButtons from '../../components/FooterButtons';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { CULTOS } from '../../utils/constants';
 import { STORAGE_KEYS, storage } from '../../clients/mmkv';
+import { useVidasContext } from '../../hooks/VidasContext';
 
 
 export default function Page() {
@@ -16,12 +17,16 @@ export default function Page() {
   const theme = useTheme();
   const culto = watch('voluntario.culto')
   const img = CULTOS.find(e => e.nome === culto)?.imagem ?? require('../../assets/logo-nome.jpeg')
+  const { vidas, newIdVidalAtual } = useVidasContext()
 
   return (
     <View style={{flex: 1}}>
       <ScrollView style={{flex: 1}}>
         <View style={[defaultStyles.container, {justifyContent: 'flex-end'}]}>
           <Stack.Screen options={{ title: "Vidas" }} />
+          {vidas.map(v => (
+            <Text key={v.id}>{v.vida.nome}</Text>
+          ))}
         </View>
       </ScrollView>
       {/* <Divider bold /> */}
@@ -39,9 +44,7 @@ export default function Page() {
             title: 'Nova vida',
             icon: 'user-plus',
             onPress: () => {
-              if(!storage.getString(STORAGE_KEYS.vida_atual)){
-                storage.set(STORAGE_KEYS.vida_atual, Date.now().toString())
-              }
+              newIdVidalAtual()
               router.push('/vidas/cadastro')
             }
           }

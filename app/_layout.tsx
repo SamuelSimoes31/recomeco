@@ -1,6 +1,7 @@
 import { PaperProvider, MD3LightTheme as DefaultTheme, MD3Theme } from 'react-native-paper';
 import { Stack } from 'expo-router';
 import { AppFormContextProvider } from '../hooks/FormContext';
+import VidasContextProvider from '../hooks/VidasContext';
 
 const theme : MD3Theme = {
   ...DefaultTheme,
@@ -18,12 +19,14 @@ export default function Layout() {
   return (
     <AppFormContextProvider>
       <PaperProvider theme={theme} >
-        <Stack screenOptions={{
-          contentStyle: {
-            backgroundColor: 'white'
-          },
-          headerTitleAlign: 'center'
-        }} />
+        <VidasContextProvider>
+          <Stack screenOptions={{
+            contentStyle: {
+              backgroundColor: 'white'
+            },
+            headerTitleAlign: 'center'
+          }} />
+        </VidasContextProvider>
       </PaperProvider>
     </AppFormContextProvider>
   );

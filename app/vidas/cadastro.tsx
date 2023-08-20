@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useFormContext } from "react-hook-form";
 import Input from '../../components/Input';
@@ -9,24 +9,19 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { defaultStyles } from '../../utils/styles';
 import { Stack, useRouter } from 'expo-router';
 import { STORAGE_KEYS, storage } from '../../clients/mmkv';
+import { useVidasContext } from '../../hooks/VidasContext';
 
 export default function cadastro() {
   const router = useRouter();
-  const vidaAtual = storage.getString(STORAGE_KEYS.vida_atual)
   const { handleSubmit } = useFormContext<FormContext>();
+  const { addVida, idVidaAtual } = useVidasContext()
 
-  if(!vidaAtual) return null
+  console.log('cadastro',{idVidaAtual})
+
+  if(!idVidaAtual) return null
 
   const onSubmit = (data: any) => {
-    console.log(data)
-    const raw = storage.getString(STORAGE_KEYS.vidas)
-    const vidas = !!raw ? JSON.parse(raw) : []
-    vidas.push(vidaAtual)
-    storage.set(STORAGE_KEYS.vidas, JSON.stringify(vidas))
-    storage.set(vidaAtual, JSON.stringify(data))
-
-    storage.delete(STORAGE_KEYS.vida_atual)
-
+    addVida(data)
     router.back()
   };
 
