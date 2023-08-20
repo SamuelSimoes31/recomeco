@@ -8,12 +8,25 @@ import { FormContext } from '../../hooks/FormContext';
 import { ScrollView } from 'react-native-gesture-handler';
 import { defaultStyles } from '../../utils/styles';
 import { Stack, useRouter } from 'expo-router';
+import { STORAGE_KEYS, storage } from '../../clients/mmkv';
 
 export default function cadastro() {
   const router = useRouter();
+  const vidaAtual = storage.getString(STORAGE_KEYS.vida_atual)
   const { handleSubmit } = useFormContext<FormContext>();
   const onSubmit = (data: any) => {
     console.log(data)
+    // let vidas : string[]
+    // const raw : any = storage.getString(STORAGE_KEYS.vidas)
+    // if(!raw){
+    //   vidas = []
+    // }
+    // JSON.parse(raw)
+
+    storage.set(vidaAtual?? 'LEAK', JSON.stringify(data))
+
+    storage.delete(STORAGE_KEYS.vida_atual)
+
     router.back()
   };
 

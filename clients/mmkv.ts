@@ -11,3 +11,8 @@ export const MMKVGetFormString = (key: FieldPathByValue<FormContext, string>) =>
 if (__DEV__) {
   initializeMMKVFlipper({ default: storage });
 }
+
+export const STORAGE_KEYS = {
+  vida_atual: 'vida_atual',
+  vidas: 'vidas'
+}

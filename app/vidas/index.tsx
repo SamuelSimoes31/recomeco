@@ -7,6 +7,7 @@ import { Avatar, Divider, FAB, Text, TouchableRipple, useTheme } from 'react-nat
 import FooterButtons from '../../components/FooterButtons';
 import { useState } from 'react';
 import { CULTOS } from '../../utils/constants';
+import { STORAGE_KEYS, storage } from '../../clients/mmkv';
 
 
 export default function Page() {
@@ -37,7 +38,12 @@ export default function Page() {
             disabled: !culto,
             title: 'Nova vida',
             icon: 'user-plus',
-            onPress: () => router.push('/vidas/cadastro')
+            onPress: () => {
+              if(!storage.getString(STORAGE_KEYS.vida_atual)){
+                storage.set(STORAGE_KEYS.vida_atual, Date.now().toString())
+              }
+              router.push('/vidas/cadastro')
+            }
           }
         ]}
       />
