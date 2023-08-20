@@ -25,31 +25,33 @@ export interface FormContext {
   id: string
 }
 
+export const defaultFormValue = {
+  voluntario: {
+    nome: MMKVGetFormString('voluntario.nome'),
+    campus: MMKVGetFormString('voluntario.campus'),
+    culto: MMKVGetFormString('voluntario.culto')
+  },
+  vida: {
+    nome: MMKVGetFormString('vida.nome'),
+    bairro: MMKVGetFormString('vida.bairro'),
+    celula: MMKVGetFormString('vida.celula'),
+    email: MMKVGetFormString('vida.email'),
+    estadoCivil: MMKVGetFormString('vida.estadoCivil') as any,
+    idade: MMKVGetFormString('vida.idade'),
+    observacoes: MMKVGetFormString('vida.observacoes'),
+    redeSocial: MMKVGetFormString('vida.redeSocial'),
+    rua: MMKVGetFormString('vida.rua'),
+    sexo: MMKVGetFormString('vida.sexo') as any,
+    telefone1: MMKVGetFormString('vida.telefone1') ??'819',
+    telefone2: MMKVGetFormString('vida.telefone2') ??'Não',
+    cidade:  MMKVGetFormString('vida.cidade') ?? 'Cabo de St. Agostinho'
+  }
+}
+
 export const AppFormContextProvider= ({children}: {children: any}) => {
   // storage.clearAll()
   const methods = useForm<FormContext>({
-    defaultValues: {
-      voluntario: {
-        nome: MMKVGetFormString('voluntario.nome'),
-        campus: MMKVGetFormString('voluntario.campus'),
-        culto: MMKVGetFormString('voluntario.culto')
-      },
-      vida: {
-        nome: MMKVGetFormString('vida.nome'),
-        bairro: MMKVGetFormString('vida.bairro'),
-        celula: MMKVGetFormString('vida.celula'),
-        email: MMKVGetFormString('vida.email'),
-        estadoCivil: MMKVGetFormString('vida.estadoCivil') as any,
-        idade: MMKVGetFormString('vida.idade'),
-        observacoes: MMKVGetFormString('vida.observacoes'),
-        redeSocial: MMKVGetFormString('vida.redeSocial'),
-        rua: MMKVGetFormString('vida.rua'),
-        sexo: MMKVGetFormString('vida.sexo') as any,
-        telefone1: MMKVGetFormString('vida.telefone1') ??'819',
-        telefone2: MMKVGetFormString('vida.telefone2') ??'Não',
-        cidade:  MMKVGetFormString('vida.cidade') ?? 'Cabo de St. Agostinho'
-      }
-    },
+    defaultValues: defaultFormValue,
     reValidateMode: 'onChange',
   })
 

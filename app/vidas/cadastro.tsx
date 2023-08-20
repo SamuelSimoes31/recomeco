@@ -16,8 +16,6 @@ export default function cadastro() {
   const { handleSubmit } = useFormContext<FormContext>();
   const { addVida, idVidaAtual } = useVidasContext();
 
-  console.log('cadastro', { idVidaAtual });
-
   if (!idVidaAtual) return null;
 
   const onSubmit = (data: any) => {
