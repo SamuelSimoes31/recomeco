@@ -7,7 +7,7 @@ import RadioGroup from '../../components/RadioGroup';
 import { FormContext } from '../../hooks/FormContext';
 import { ScrollView } from 'react-native-gesture-handler';
 import { defaultStyles } from '../../utils/styles';
-import { useRouter } from 'expo-router';
+import { Stack, useRouter } from 'expo-router';
 
 export default function cadastro() {
   const router = useRouter();
@@ -19,6 +19,7 @@ export default function cadastro() {
 
   return (
     <ScrollView>
+      <Stack.Screen options={{ title: "Cadastro" }} />
       <View style={[defaultStyles.container, {gap: 8}]}>
         <Input
           name='vida.nome'
@@ -105,7 +106,7 @@ export default function cadastro() {
           label={'OBSERVAÇÕES'}
           placeholder='Insira um valor'
         />
-        <Button mode='contained' style={{marginTop: 24}} onPress={handleSubmit(onSubmit)} >Enviar</Button>
+        <Button mode='contained' style={{marginTop: 24}} onPress={handleSubmit(onSubmit)} >Salvar</Button>
 
       </View>
     </ScrollView>
