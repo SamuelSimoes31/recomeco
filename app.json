@@ -28,6 +28,11 @@
     "scheme": "acme",
     "web": {
       "bundler": "metro"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "261efd5c-9798-4993-b33c-fb90e9b6ac85"
+      }
     }
   }
 }
