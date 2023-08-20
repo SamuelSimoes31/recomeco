@@ -1,5 +1,5 @@
 import { FormProvider, useForm } from 'react-hook-form';
-import { MMKVGetFormString, storage } from '../clients/mmkv';
+import { MMKVGetFormString, STORAGE_KEYS, storage } from '../clients/mmkv';
 
 export interface FormContext {
   voluntario: {
@@ -32,11 +32,22 @@ export const AppFormContextProvider= ({children}: {children: any}) => {
       voluntario: {
         nome: MMKVGetFormString('voluntario.nome'),
         campus: MMKVGetFormString('voluntario.campus'),
+        culto: MMKVGetFormString('voluntario.culto')
       },
       vida: {
-        telefone1: '819',
-        telefone2: 'Não',
-        cidade: 'Cabo de St. Agostinho'
+        nome: MMKVGetFormString('vida.nome'),
+        bairro: MMKVGetFormString('vida.bairro'),
+        celula: MMKVGetFormString('vida.celula'),
+        email: MMKVGetFormString('vida.email'),
+        estadoCivil: MMKVGetFormString('vida.estadoCivil') as any,
+        idade: MMKVGetFormString('vida.idade'),
+        observacoes: MMKVGetFormString('vida.observacoes'),
+        redeSocial: MMKVGetFormString('vida.redeSocial'),
+        rua: MMKVGetFormString('vida.rua'),
+        sexo: MMKVGetFormString('vida.sexo') as any,
+        telefone1: MMKVGetFormString('vida.telefone1') ??'819',
+        telefone2: MMKVGetFormString('vida.telefone2') ??'Não',
+        cidade:  MMKVGetFormString('vida.cidade') ?? 'Cabo de St. Agostinho'
       }
     },
     reValidateMode: 'onChange',

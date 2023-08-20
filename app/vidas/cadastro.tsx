@@ -14,29 +14,31 @@ import { useVidasContext } from '../../hooks/VidasContext';
 export default function cadastro() {
   const router = useRouter();
   const { handleSubmit } = useFormContext<FormContext>();
-  const { addVida, idVidaAtual } = useVidasContext()
+  const { addVida, idVidaAtual } = useVidasContext();
 
-  console.log('cadastro',{idVidaAtual})
+  console.log('cadastro', { idVidaAtual });
 
-  if(!idVidaAtual) return null
+  if (!idVidaAtual) return null;
 
   const onSubmit = (data: any) => {
-    addVida(data)
-    router.back()
+    addVida(data);
+    router.push('/vidas');
   };
 
   return (
     <ScrollView>
       <Stack.Screen options={{ title: "Cadastro" }} />
-      <View style={[defaultStyles.container, {gap: 8}]}>
+      <View style={[defaultStyles.container, { gap: 8 }]}>
         <Input
           name='vida.nome'
+          MMKVKey='vida.nome'
           label={'NOME COMPLETO'}
           placeholder='Insira um valor'
           required
         />
         <Input
           name='vida.idade'
+          MMKVKey='vida.idade'
           label={'IDADE'}
           placeholder='Insira um valor'
           required
@@ -44,28 +46,32 @@ export default function cadastro() {
         />
         <RadioGroup
           name='vida.sexo'
+          MMKVKey='vida.sexo'
           label='SEXO'
           options={['MASCULINO', 'FEMININO']}
           required
         />
         <RadioGroup
           name='vida.estadoCivil'
+          MMKVKey='vida.estadoCivil'
           label='ESTADO CIVIL'
           options={['CASADO(A)', 'SOLTEIRO(A)', 'VIUVO(A)']}
           required
         />
         <Input
           name='vida.telefone1'
+          MMKVKey='vida.telefone1'
           label={'Telefone 1'}
           required
           keyboardType='number-pad'
           rules={{
-            minLength: {value: 11, message: 'Número deve ter 11 caracteres'},
+            minLength: { value: 11, message: 'Número deve ter 11 caracteres' },
           }}
           maxLength={11}
         />
         <Input
           name='vida.telefone2'
+          MMKVKey='vida.telefone2'
           label={'Telefone 1'}
           keyboardType='number-pad'
           // rules={{
@@ -75,46 +81,53 @@ export default function cadastro() {
         />
         <Input
           name='vida.rua'
+          MMKVKey='vida.rua'
           label={'ENDEREÇO(Av, rua, nº, complemento)'}
           placeholder='Insira um valor'
           required
         />
         <Input
           name='vida.bairro'
+          MMKVKey='vida.bairro'
           label={'BAIRRO'}
           placeholder='Insira um valor'
           required
         />
         <Input
           name='vida.cidade'
+          MMKVKey='vida.cidade'
           label={'CIDADE'}
           placeholder='Insira um valor'
           required
         />
         <Input
           name='vida.email'
+          MMKVKey='vida.email'
           label={'EMAIL'}
           placeholder='Insira um valor'
           required
         />
         <Input
           name='vida.redeSocial'
+          MMKVKey='vida.redeSocial'
           label={'REDE SOCIAL'}
           placeholder='Insira um valor'
           required
         />
         <Input
           name='vida.celula'
+          MMKVKey='vida.celula'
           label={'PARTICIPA DE CÉLULA?'}
           placeholder='Caso seja SIM, qual CÉLULA, LÍDER, REDE?'
           required
         />
         <Input
           name='vida.observacoes'
+          MMKVKey='vida.observacoes'
           label={'OBSERVAÇÕES'}
           placeholder='Insira um valor'
         />
-        <Button mode='contained' style={{marginTop: 24}} onPress={handleSubmit(onSubmit)} >Salvar</Button>
+        <Button mode='contained' style={{ marginTop: 24 }} onPress={handleSubmit(onSubmit)} >Salvar</Button>
 
       </View>
     </ScrollView>

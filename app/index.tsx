@@ -6,11 +6,13 @@ import Dropdown from '../components/DropDown';
 import { useFormContext } from 'react-hook-form';
 import { FormContext } from '../hooks/FormContext';
 import { defaultStyles } from '../utils/styles';
+import { useVidasContext } from '../hooks/VidasContext';
 
 
 export default function Page() {
   const router = useRouter();
   const { handleSubmit } = useFormContext<FormContext>();
+  const {idVidaAtual} = useVidasContext()
 
   return (
     <View style={[defaultStyles.container, styles.main]}>
@@ -39,7 +41,8 @@ export default function Page() {
       <Button
         mode='contained'
         onPress={handleSubmit(() => {
-          router.push('/vidas');
+          if(idVidaAtual) router.push('/vidas/cadastro')
+          else router.push('/vidas');
         })}
       >
         Prosseguir

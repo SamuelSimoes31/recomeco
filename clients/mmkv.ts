@@ -14,5 +14,6 @@ if (__DEV__) {
 
 export const STORAGE_KEYS = {
   vida_atual: 'vida_atual',
-  vidas: 'vidas'
+  vidas: 'vidas',
+  culto: 'voluntario.culto'
 }

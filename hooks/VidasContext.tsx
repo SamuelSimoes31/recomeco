@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import { STORAGE_KEYS, storage } from '../clients/mmkv';
 import { FormContext } from './FormContext';
+import { useFormContext } from 'react-hook-form';
 
 interface IVidasContext {
   addVida: (vida: FormContext) => void;
@@ -27,6 +28,7 @@ function vidasInitialValue() {
 }
 
 export default function VidasContextProvider({children}: {children: React.ReactNode}) {
+  const { getValues } = useFormContext<FormContext>()
   const [vidas, setVidas] = useState<FormContext[]>(vidasInitialValue())
   const [idVidaAtual, setIdVidaAtual] = useState<string | undefined>(storage.getString(STORAGE_KEYS.vida_atual))
 
@@ -39,9 +41,10 @@ export default function VidasContextProvider({children}: {children: React.ReactN
       setVidas(p => [...p,{...vida, id: idVidaAtual}])
 
       storage.set(STORAGE_KEYS.vidas, JSON.stringify(listaIds)) //salvar lista
-      storage.set(idVidaAtual, JSON.stringify(vida)) //salvar dados
+      storage.set(idVidaAtual, JSON.stringify({...vida, id: idVidaAtual})) //salvar dados
 
       storage.delete(STORAGE_KEYS.vida_atual)
+      storage.delete(STORAGE_KEYS.culto)
     }
   }
 
@@ -50,6 +53,8 @@ export default function VidasContextProvider({children}: {children: React.ReactN
       const newId = Date.now().toString()
       setIdVidaAtual(newId)
       storage.set(STORAGE_KEYS.vida_atual, newId)
+
+      storage.set(STORAGE_KEYS.culto, getValues('voluntario.culto'))
     }
   }
 
