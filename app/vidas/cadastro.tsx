@@ -14,16 +14,16 @@ export default function cadastro() {
   const router = useRouter();
   const vidaAtual = storage.getString(STORAGE_KEYS.vida_atual)
   const { handleSubmit } = useFormContext<FormContext>();
+
+  if(!vidaAtual) return null
+
   const onSubmit = (data: any) => {
     console.log(data)
-    // let vidas : string[]
-    // const raw : any = storage.getString(STORAGE_KEYS.vidas)
-    // if(!raw){
-    //   vidas = []
-    // }
-    // JSON.parse(raw)
-
-    storage.set(vidaAtual?? 'LEAK', JSON.stringify(data))
+    const raw = storage.getString(STORAGE_KEYS.vidas)
+    const vidas = !!raw ? JSON.parse(raw) : []
+    vidas.push(vidaAtual)
+    storage.set(STORAGE_KEYS.vidas, JSON.stringify(vidas))
+    storage.set(vidaAtual, JSON.stringify(data))
 
     storage.delete(STORAGE_KEYS.vida_atual)
 
