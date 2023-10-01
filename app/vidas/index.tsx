@@ -1,5 +1,5 @@
 import { Stack, useRouter } from 'expo-router';
-import { ScrollView, StyleSheet, View, Image } from "react-native";
+import { ScrollView, StyleSheet, View, Image, Linking } from "react-native";
 import { useFormContext } from 'react-hook-form';
 import { FormContext } from '../../hooks/FormContext';
 import { defaultStyles } from '../../utils/styles';
@@ -21,7 +21,7 @@ export default function Page() {
 
   function onSendGoogleForm(vida: FormContext){
     const url = buildFormURL(vida)
-    console.log(url)
+    Linking.openURL(url)
   }
 
   return (
