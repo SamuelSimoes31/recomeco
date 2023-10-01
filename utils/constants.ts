@@ -87,7 +87,7 @@ export const WHATSAPP_MESSAGES_ENTRIES :Record<string,string> = {
 
 const RECOMECO_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSer9CgfTH3HjEdHlVUauC9LH6EeCOhIBaNq8NVGwh3WrVagFw/viewform?usp=pp_url'
 
-const WHATSAPP_NUMBER = '81985860368'
+const WHATSAPP_NUMBER = '5581985860368'
 
 export const buildFormURL = (values: FormContext) => {
   const flatValues = flattenObject(values)
