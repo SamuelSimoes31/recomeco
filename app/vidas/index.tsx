@@ -6,18 +6,23 @@ import { defaultStyles } from '../../utils/styles';
 import { Avatar, Button, Card, Divider, FAB, IconButton, Text, TouchableRipple, useTheme } from 'react-native-paper';
 import FooterButtons from '../../components/FooterButtons';
 import { useEffect, useState } from 'react';
-import { CULTOS } from '../../utils/constants';
+import { CULTOS, buildFormURL } from '../../utils/constants';
 import { STORAGE_KEYS, storage } from '../../clients/mmkv';
 import { useVidasContext } from '../../hooks/VidasContext';
 
 
 export default function Page() {
   const router = useRouter();
-  const { setValue, watch } = useFormContext<FormContext>();
+  const { getValues, watch } = useFormContext<FormContext>();
   const theme = useTheme();
   const culto = watch('voluntario.culto')
   const img = CULTOS.find(e => e.nome === culto)?.imagem ?? require('../../assets/logo-nome.jpeg')
   const { vidas, newIdVidalAtual } = useVidasContext()
+
+  function onSendGoogleForm(vida: FormContext){
+    const url = buildFormURL(vida)
+    console.log(url)
+  }
 
   return (
     <View style={{flex: 1}}>
@@ -30,7 +35,7 @@ export default function Page() {
                 <Card.Content style={{flexDirection: 'row', alignItems: 'center', gap: 8}}>
                   <Text style={{marginRight: 'auto'}}>{v.vida.nome}</Text>
                   <IconButton mode='contained' icon='account-tie' onPress={() => null}/>
-                  <IconButton mode='contained' icon='form-select'  onPress={() => null}/>
+                  <IconButton mode='contained' icon='form-select'  onPress={() => onSendGoogleForm(v)}/>
                 </Card.Content>
               </Card>
             ))}
