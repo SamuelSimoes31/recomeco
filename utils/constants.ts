@@ -66,7 +66,28 @@ export const GOOGLE_FORM_ENTRIES :Record<string,number> = {
   'CONVERSAO': 691748290,
 }
 
+export const WHATSAPP_MESSAGES_ENTRIES :Record<string,string> = {
+  'vida.nome': 'Nome',
+  'vida.idade': 'Idade',
+  'vida.sexo': 'Sexo',
+  'vida.estadoCivil': 'Estado Civil',
+  'vida.telefone1': 'Telefone 1',
+  'vida.telefone2': 'Telefone 2',
+  'vida.rua': 'Endereço',
+  'vida.bairro': 'Bairro',
+  'vida.cidade': 'Cidade',
+  'vida.email': 'Email',
+  'vida.redeSocial': 'Rede Social',
+  'vida.celula': 'Participa de célula',
+  'voluntario.culto': 'Culto',
+  'voluntario.nome': 'Voluntário',
+  'vida.observacoes': 'Observações',
+  'voluntario.campus': 'Campus',
+}
+
 const RECOMECO_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSer9CgfTH3HjEdHlVUauC9LH6EeCOhIBaNq8NVGwh3WrVagFw/viewform?usp=pp_url'
+
+const WHATSAPP_NUMBER = '81985860368'
 
 export const buildFormURL = (values: FormContext) => {
   const flatValues = flattenObject(values)
@@ -79,6 +100,20 @@ export const buildFormURL = (values: FormContext) => {
   })
 
   return RECOMECO_FORM_URL + entries + `&entry.${GOOGLE_FORM_ENTRIES['CONVERSAO']}=${encodeURI('PRESENCIAL')}`
+}
+
+export const buildWhatsappMessageUrl = (values: FormContext) => {
+  const flatValues = flattenObject(values)
+  flatValues['voluntario.campus'] = flatValues['voluntario.campus'] + ' / ' + flatValues['voluntario.culto']
+  delete flatValues['voluntario.culto']
+
+  let message = ''
+  Object.entries(flatValues).forEach(([key,value]) => {
+    message = message.concat(encodeURI(`*${WHATSAPP_MESSAGES_ENTRIES[key]}:* ${value}\n`))
+  })
+
+  // return 'whatsapp://send?text=' + message + '&phone=' + WHATSAPP_NUMBER
+  return 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + message
 }
 
 const flattenObject = (obj: any, prefix = '') =>

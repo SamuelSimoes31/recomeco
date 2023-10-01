@@ -6,7 +6,7 @@ import { defaultStyles } from '../../utils/styles';
 import { Avatar, Button, Card, Divider, FAB, IconButton, Text, TouchableRipple, useTheme } from 'react-native-paper';
 import FooterButtons from '../../components/FooterButtons';
 import { useEffect, useState } from 'react';
-import { CULTOS, buildFormURL } from '../../utils/constants';
+import { CULTOS, buildFormURL, buildWhatsappMessageUrl } from '../../utils/constants';
 import { STORAGE_KEYS, storage } from '../../clients/mmkv';
 import { useVidasContext } from '../../hooks/VidasContext';
 
@@ -24,6 +24,11 @@ export default function Page() {
     Linking.openURL(url)
   }
 
+  function onSendWhatsappMessage(vida: FormContext){
+    const url = buildWhatsappMessageUrl(vida)
+    Linking.openURL(url)
+  }
+
   return (
     <View style={{flex: 1}}>
       <ScrollView style={{flex: 1}}>
@@ -34,7 +39,7 @@ export default function Page() {
               <Card key={v.id}>
                 <Card.Content style={{flexDirection: 'row', alignItems: 'center', gap: 8}}>
                   <Text style={{marginRight: 'auto'}}>{v.vida.nome}</Text>
-                  <IconButton mode='contained' icon='account-tie' onPress={() => null}/>
+                  <IconButton mode='contained' icon='account-tie' onPress={() => onSendWhatsappMessage(v)}/>
                   <IconButton mode='contained' icon='form-select'  onPress={() => onSendGoogleForm(v)}/>
                 </Card.Content>
               </Card>
