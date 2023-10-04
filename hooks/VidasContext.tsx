@@ -62,6 +62,7 @@ export default function VidasContextProvider({ children }: { children: React.Rea
       storage.set(idVidaAtual, JSON.stringify({ ...vida, id: idVidaAtual })); //salvar dados
 
       storage.delete(STORAGE_KEYS.vida_atual);
+      setIdVidaAtual(undefined)
       cleanMMKVForm()
       reset({
         vida: defaultFormValue.vida,
