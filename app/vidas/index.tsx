@@ -5,11 +5,9 @@ import { FormContext } from '../../hooks/FormContext';
 import { defaultStyles } from '../../utils/styles';
 import { Avatar, Button, Card, Divider, FAB, IconButton, Text, TouchableRipple, useTheme } from 'react-native-paper';
 import FooterButtons from '../../components/FooterButtons';
-import { useEffect, useState } from 'react';
-import { CULTOS, buildFormURL, buildWhatsappMessageUrl } from '../../utils/constants';
-import { STORAGE_KEYS, storage } from '../../clients/mmkv';
+import { CULTOS,  } from '../../utils/constants';
 import { useVidasContext } from '../../hooks/VidasContext';
-
+import { buildFormURL, buildWhatsappMessageUrl } from '../../utils/sendInfo';
 
 export default function Page() {
   const router = useRouter();
