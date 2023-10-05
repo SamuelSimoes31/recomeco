@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Alert, StyleSheet, View } from 'react-native';
 import { useFormContext } from "react-hook-form";
 import Input from '../../components/Input';
 import { Button } from 'react-native-paper';
@@ -14,7 +14,7 @@ import { useVidasContext } from '../../hooks/VidasContext';
 export default function cadastro() {
   const router = useRouter();
   const { handleSubmit } = useFormContext<FormContext>();
-  const { addVida, idVidaAtual } = useVidasContext();
+  const { addVida, cancelVida, idVidaAtual } = useVidasContext();
 
   if (!idVidaAtual) return null;
 
@@ -23,9 +23,28 @@ export default function cadastro() {
     router.push('/vidas');
   };
 
+  const onCancel = () => {
+    Alert.alert(
+      'Tem certeza que deseja cancelar?',
+      'Todos os dados serão perdidos!!!',
+      [{
+        text: 'Sim',
+        onPress: () => {
+          cancelVida();
+          router.back()
+        }
+      },{
+        text: 'Voltar',
+      }],
+      {
+        cancelable: true
+      }
+    );
+  };
+
   return (
     <ScrollView>
-      <Stack.Screen options={{ title: "Cadastro" }} />
+      <Stack.Screen options={{ title: "Cadastro", headerRight: () => <Button onPress={onCancel}>cancelar</Button> }} />
       <View style={[defaultStyles.container, { gap: 8 }]}>
         <Input
           name='vida.nome'

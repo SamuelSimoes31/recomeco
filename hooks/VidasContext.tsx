@@ -8,6 +8,7 @@ interface IVidasContext {
   vidas: FormContext[];
   idVidaAtual: string | undefined;
   newIdVidalAtual: () => void;
+  cancelVida: () => void;
 }
 
 const VidasContext = createContext<IVidasContext>(null as any);
@@ -61,14 +62,18 @@ export default function VidasContextProvider({ children }: { children: React.Rea
       storage.set(STORAGE_KEYS.vidas, JSON.stringify(listaIds)); //salvar lista
       storage.set(idVidaAtual, JSON.stringify({ ...vida, id: idVidaAtual })); //salvar dados
 
-      storage.delete(STORAGE_KEYS.vida_atual);
-      setIdVidaAtual(undefined)
-      cleanMMKVForm()
-      reset({
-        vida: defaultFormValue.vida,
-        voluntario: {...defaultFormValue, culto: getValues('voluntario.culto')}
-      })
+      cancelVida()
     }
+  }
+
+  function cancelVida() {
+    storage.delete(STORAGE_KEYS.vida_atual);
+    setIdVidaAtual(undefined)
+    cleanMMKVForm()
+    reset({
+      vida: defaultFormValue.vida,
+      voluntario: {...defaultFormValue, culto: getValues('voluntario.culto')}
+    })
   }
 
   function newIdVidalAtual() {
@@ -85,7 +90,8 @@ export default function VidasContextProvider({ children }: { children: React.Rea
     vidas,
     addVida,
     idVidaAtual,
-    newIdVidalAtual
+    newIdVidalAtual,
+    cancelVida
   }), [vidas, idVidaAtual]);
 
   return (
