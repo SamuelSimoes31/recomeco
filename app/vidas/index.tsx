@@ -39,6 +39,7 @@ export default function Page() {
                   <View style={{flex: 1}}>
                     <Text style={{marginRight: 'auto', fontWeight: "700"}}>{v.vida.nome}</Text>
                     <Text style={{marginRight: 'auto'}}>{new Date(Number(v.id)).toLocaleDateString('pt-br')}</Text>
+                    <Text style={{marginRight: 'auto'}}>{v.voluntario.culto}</Text>
                   </View>
                   <IconButton mode='contained' icon='account-tie' onPress={() => onSendWhatsappMessage(v)}/>
                   <IconButton mode='contained' icon='form-select'  onPress={() => onSendGoogleForm(v)}/>
