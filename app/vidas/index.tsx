@@ -36,7 +36,10 @@ export default function Page() {
             {vidas.map(v => (
               <Card key={v.id}>
                 <Card.Content style={{flexDirection: 'row', alignItems: 'center', gap: 8}}>
-                  <Text style={{marginRight: 'auto'}}>{v.vida.nome}</Text>
+                  <View style={{flex: 1}}>
+                    <Text style={{marginRight: 'auto', fontWeight: "700"}}>{v.vida.nome}</Text>
+                    <Text style={{marginRight: 'auto'}}>{new Date(Number(v.id)).toLocaleDateString('pt-br')}</Text>
+                  </View>
                   <IconButton mode='contained' icon='account-tie' onPress={() => onSendWhatsappMessage(v)}/>
                   <IconButton mode='contained' icon='form-select'  onPress={() => onSendGoogleForm(v)}/>
                 </Card.Content>
