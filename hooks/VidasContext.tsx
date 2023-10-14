@@ -56,7 +56,7 @@ export default function VidasContextProvider({ children }: { children: React.Rea
   function addVida(vida: FormContext) {
     if (idVidaAtual) {
       const listaIds = getVidasListIds();
-      listaIds.push(idVidaAtual);
+      listaIds.unshift(idVidaAtual);
       setVidas(p => [...p, { ...vida, id: idVidaAtual }]);
 
       storage.set(STORAGE_KEYS.vidas, JSON.stringify(listaIds)); //salvar lista
