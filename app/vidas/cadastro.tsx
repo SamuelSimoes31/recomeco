@@ -1,5 +1,5 @@
-import React, { useEffect, useMemo } from 'react';
-import { Alert, StyleSheet, View } from 'react-native';
+import React from 'react';
+import { Alert, View } from 'react-native';
 import { useFormContext } from "react-hook-form";
 import Input from '../../components/Input';
 import { Button } from 'react-native-paper';
@@ -8,7 +8,6 @@ import { FormContext } from '../../hooks/FormContext';
 import { ScrollView } from 'react-native-gesture-handler';
 import { defaultStyles } from '../../utils/styles';
 import { Stack, useNavigation, useRouter } from 'expo-router';
-import { STORAGE_KEYS, storage } from '../../clients/mmkv';
 import { useVidasContext } from '../../hooks/VidasContext';
 
 export default function cadastro() {
@@ -17,28 +16,24 @@ export default function cadastro() {
   const { handleSubmit } = useFormContext<FormContext>();
   const { addVida, cancelVida, idVidaAtual } = useVidasContext();
 
-  useEffect(() => {
-    navigation.addListener('beforeRemove', (e) => {
-        e.preventDefault();
-        Alert.alert(
-          'Tem certeza que deseja cancelar?',
-          'Todos os dados serão perdidos!!!',
-          [{
-            text: 'Sim',
-            onPress: () => {
-              cancelVida();
-              navigation.dispatch(e.data.action)
-            }
-          },{
-            text: 'Voltar',
-          }],
-          {
-            cancelable: true
-          }
-        );
-        ;
-    });
-  }, []);
+  const onCancel = () => {
+    Alert.alert(
+      'Tem certeza que deseja cancelar?',
+      'Todos os dados serão perdidos!!!',
+      [{
+        text: 'Sim',
+        onPress: () => {
+          cancelVida();
+          router.back()
+        }
+      },{
+        text: 'Voltar',
+      }],
+      {
+        cancelable: true
+      }
+    );
+  };
 
   if (!idVidaAtual) return null;
 
@@ -49,7 +44,7 @@ export default function cadastro() {
 
   return (
     <ScrollView>
-      <Stack.Screen options={{ title: "Cadastro" }} />
+      <Stack.Screen options={{ title: "Cadastro", headerRight: () => <Button onPress={onCancel}>cancelar</Button> }} />
       <View style={[defaultStyles.container, { gap: 8 }]}>
         <Input
           name='vida.nome'
