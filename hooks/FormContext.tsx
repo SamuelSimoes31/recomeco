@@ -23,6 +23,10 @@ export interface FormContext {
     observacoes: string
   }
   id: string
+  acoes?: {
+    enviarLider?: boolean
+    enviarForm?: boolean
+  }
 }
 
 export const defaultFormValue = {

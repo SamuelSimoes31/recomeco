@@ -5,6 +5,7 @@ import { useFormContext } from 'react-hook-form';
 
 interface IVidasContext {
   addVida: (vida: FormContext) => void;
+  updateVida: (vida: FormContext) => void;
   vidas: FormContext[];
   idVidaAtual: string | undefined;
   newIdVidalAtual: () => void;
@@ -66,6 +67,20 @@ export default function VidasContextProvider({ children }: { children: React.Rea
     }
   }
 
+  function updateVida(vida: FormContext) {
+    const currentVidaIndex = vidas.findIndex(v => v.id === vida.id)
+    if(currentVidaIndex === -1) return
+
+    const updatedVidas = [
+      ...vidas.slice(0, currentVidaIndex),
+      vida,
+      ...vidas.slice(currentVidaIndex + 1)
+    ];
+
+    setVidas(updatedVidas)
+    storage.set(vida.id, JSON.stringify(vida)); //salvar dados
+  }
+
   function cancelVida() {
     storage.delete(STORAGE_KEYS.vida_atual);
     setIdVidaAtual(undefined)
@@ -91,7 +106,8 @@ export default function VidasContextProvider({ children }: { children: React.Rea
     addVida,
     idVidaAtual,
     newIdVidalAtual,
-    cancelVida
+    cancelVida,
+    updateVida
   }), [vidas, idVidaAtual]);
 
   return (

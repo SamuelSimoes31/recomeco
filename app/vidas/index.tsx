@@ -15,14 +15,16 @@ export default function Page() {
   const theme = useTheme();
   const culto = watch('voluntario.culto')
   const img = CULTOS.find(e => e.nome === culto)?.imagem ?? require('../../assets/logo-nome.jpeg')
-  const { vidas, newIdVidalAtual } = useVidasContext()
+  const { vidas, newIdVidalAtual, updateVida } = useVidasContext()
 
   function onSendGoogleForm(vida: FormContext){
+    updateVida({...vida, acoes: {...vida?.acoes, enviarForm: true}})
     const url = buildFormURL(vida)
     Linking.openURL(url)
   }
 
   function onSendWhatsappMessage(vida: FormContext){
+    updateVida({...vida, acoes: {...vida?.acoes, enviarLider: true}})
     const url = buildWhatsappMessageUrl(vida)
     Linking.openURL(url)
   }
@@ -41,8 +43,8 @@ export default function Page() {
                     <Text style={{marginRight: 'auto'}}>{new Date(Number(v.id)).toLocaleDateString('pt-br')}</Text>
                     <Text style={{marginRight: 'auto'}}>{v.voluntario.culto}</Text>
                   </View>
-                  <IconButton mode='contained' icon='account-tie' onPress={() => onSendWhatsappMessage(v)}/>
-                  <IconButton mode='contained' icon='form-select'  onPress={() => onSendGoogleForm(v)}/>
+                  <IconButton mode='contained' icon='account-tie' iconColor={v?.acoes?.enviarLider ? 'green' : theme.colors.primary} onPress={() => onSendWhatsappMessage(v)}/>
+                  <IconButton mode='contained' icon='form-select'  iconColor={v?.acoes?.enviarForm ? 'green' : theme.colors.primary} onPress={() => onSendGoogleForm(v)}/>
                 </Card.Content>
               </Card>
             ))}
