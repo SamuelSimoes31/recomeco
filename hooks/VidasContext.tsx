@@ -87,7 +87,7 @@ export default function VidasContextProvider({ children }: { children: React.Rea
     cleanMMKVForm()
     reset({
       vida: defaultFormValue.vida,
-      voluntario: {...defaultFormValue, culto: getValues('voluntario.culto')}
+      voluntario: getValues('voluntario')
     })
   }
 
