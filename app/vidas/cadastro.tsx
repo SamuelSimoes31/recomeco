@@ -85,6 +85,7 @@ export default function cadastro() {
             minLength: { value: 11, message: 'Número deve ter 11 caracteres' },
           }}
           maxLength={11}
+          helperText='Caso número não seja da pessoa, botar nas observações'
         />
         <Input
           name='vida.telefone2'

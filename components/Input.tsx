@@ -13,6 +13,7 @@ type InputP =
     name: FieldPathByValue<FormContext, string>;
     MMKVKey?: FieldPathByValue<FormContext, string> | string;
     required?: boolean;
+    helperText?: string
   };
 
 export default function Input({
@@ -23,6 +24,7 @@ export default function Input({
   shouldUnregister,
   MMKVKey,
   required,
+  helperText,
   ...rest
 }: InputP) {
   const { control, formState } = useFormContext<FormContext>();
@@ -56,7 +58,8 @@ export default function Input({
           />
         )}
       />
-      <HelperText visible={!!error} type='error'>{error?.message}</HelperText>
+      {helperText && !error && <HelperText type='info'>{helperText}</HelperText>}
+      <HelperText visible={!!error || !helperText} type='error'>{error?.message}</HelperText>
     </View>
   );
 }
