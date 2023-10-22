@@ -29,18 +29,18 @@ export const WHATSAPP_MESSAGES_ENTRIES :Record<string,string> = {
   'vida.estadoCivil': 'Estado Civil',
   'vida.telefone1': 'Telefone 1',
   'vida.telefone2': 'Telefone 2',
+  'vida.redeSocial': 'Rede Social',
+  'vida.email': 'Email',
   'vida.rua': 'Endereço',
   'vida.bairro': 'Bairro',
   'vida.cidade': 'Cidade',
   'vida.estadoPais': 'Estado/Pais',
-  'vida.email': 'Email',
-  'vida.redeSocial': 'Rede Social',
   'vida.participaCelula': 'Participa de célula',
   'vida.celula': 'Célula',
+  'vida.observacoes': 'Observações',
   'voluntario.campus': 'Campus',
   'voluntario.culto': 'Culto',
   'voluntario.nome': 'Voluntário',
-  'vida.observacoes': 'Observações',
 }
 
 const RECOMECO_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSer9CgfTH3HjEdHlVUauC9LH6EeCOhIBaNq8NVGwh3WrVagFw/viewform?usp=pp_url'
