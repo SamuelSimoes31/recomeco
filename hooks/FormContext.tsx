@@ -17,8 +17,10 @@ export interface FormContext {
     rua: string
     bairro: string
     cidade: string
+    estadoPais: string
     email: string
     redeSocial: string
+    participaCelula: string
     celula: string
     observacoes: string
   }
@@ -38,7 +40,6 @@ export const defaultFormValue = {
   vida: {
     nome: MMKVGetFormString('vida.nome'),
     bairro: MMKVGetFormString('vida.bairro'),
-    celula: MMKVGetFormString('vida.celula'),
     email: MMKVGetFormString('vida.email'),
     estadoCivil: MMKVGetFormString('vida.estadoCivil') as any,
     idade: MMKVGetFormString('vida.idade'),
@@ -48,7 +49,10 @@ export const defaultFormValue = {
     sexo: MMKVGetFormString('vida.sexo') as any,
     telefone1: MMKVGetFormString('vida.telefone1') ??'819',
     telefone2: MMKVGetFormString('vida.telefone2') ??'Não',
-    cidade:  MMKVGetFormString('vida.cidade') ?? 'Cabo de St. Agostinho'
+    cidade:  MMKVGetFormString('vida.cidade') ?? 'Cabo de St. Agostinho',
+    estadoPais: MMKVGetFormString('vida.estadoPais') ?? 'PE - BRASIL',
+    participaCelula: MMKVGetFormString('vida.participaCelula') as any,
+    celula: MMKVGetFormString('vida.celula'),
   }
 }
 

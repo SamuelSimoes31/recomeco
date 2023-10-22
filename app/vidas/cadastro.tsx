@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Alert, View } from 'react-native';
 import { useFormContext } from "react-hook-form";
 import Input from '../../components/Input';
@@ -13,8 +13,15 @@ import { useVidasContext } from '../../hooks/VidasContext';
 export default function cadastro() {
   const router = useRouter();
   const navigation = useNavigation();
-  const { handleSubmit, formState } = useFormContext<FormContext>();
+  const { handleSubmit, formState, watch, setValue } = useFormContext<FormContext>();
   const { addVida, cancelVida, idVidaAtual } = useVidasContext();
+  const participaCelula = watch('vida.participaCelula')
+
+  useEffect(() => {
+    if(participaCelula === 'NÃO'){
+      setValue('vida.celula', '')
+    }
+  }, [participaCelula])
 
   const onCancel = () => {
     Alert.alert(
@@ -41,6 +48,7 @@ export default function cadastro() {
     addVida(data);
     router.push('/vidas');
   };
+
 
   return (
     <ScrollView>
@@ -119,6 +127,13 @@ export default function cadastro() {
           required
         />
         <Input
+          name='vida.estadoPais'
+          MMKVKey='vida.estadoPais'
+          label={'ESTADO/PAIS'}
+          placeholder='Insira um valor'
+          required
+        />
+        <Input
           name='vida.email'
           MMKVKey='vida.email'
           label={'EMAIL'}
@@ -132,20 +147,29 @@ export default function cadastro() {
           placeholder='Insira um valor'
           required
         />
-        <Input
-          name='vida.celula'
-          MMKVKey='vida.celula'
-          label={'PARTICIPA DE CÉLULA?'}
-          placeholder='Caso seja SIM, qual CÉLULA, LÍDER, REDE?'
+        <RadioGroup
+          name='vida.participaCelula'
+          MMKVKey='vida.participaCelula'
+          label='PARTICIPA DE CÉLULA?'
+          options={['SIM', 'NÃO']}
           required
         />
+        {participaCelula === 'SIM' && (
+          <Input
+            name='vida.celula'
+            MMKVKey='vida.celula'
+            label={'QUAL A CÉLULA, LÍDER E REDE?'}
+            placeholder='Insira um valor'
+            required
+          />
+        )}
         <Input
           name='vida.observacoes'
           MMKVKey='vida.observacoes'
           label={'OBSERVAÇÕES'}
           placeholder='Insira um valor'
         />
-        {Object.keys(formState.errors)?.length > 0 && <Text variant='bodyMedium'>Verifique as respsotas, algumas contém erros</Text>}
+        {Object.keys(formState.errors)?.length > 0 && <Text variant='bodyMedium'>Verifique as respostas, algumas contém erros</Text>}
         <Button mode='contained' style={{ marginTop: 24 }} onPress={handleSubmit(onSubmit)} >Salvar</Button>
 
       </View>
