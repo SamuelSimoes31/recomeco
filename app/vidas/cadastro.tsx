@@ -89,7 +89,7 @@ export default function cadastro() {
         <Input
           name='vida.telefone2'
           MMKVKey='vida.telefone2'
-          label={'Telefone 1'}
+          label={'Telefone 2'}
           keyboardType='number-pad'
           // rules={{
           //   minLength: {value: 11, message: 'Número deve ter 11 caracteres'},
