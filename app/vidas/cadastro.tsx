@@ -69,20 +69,23 @@ export default function cadastro() {
           required
           keyboardType='number-pad'
         />
-        <RadioGroup
-          name='vida.sexo'
-          MMKVKey='vida.sexo'
-          label='SEXO'
-          options={['MASCULINO', 'FEMININO']}
-          required
-        />
-        <RadioGroup
-          name='vida.estadoCivil'
-          MMKVKey='vida.estadoCivil'
-          label='ESTADO CIVIL'
-          options={['CASADO(A)', 'SOLTEIRO(A)', 'VIUVO(A)']}
-          required
-        />
+        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+          <RadioGroup
+            name='vida.sexo'
+            MMKVKey='vida.sexo'
+            label='SEXO'
+            options={['MASCULINO', 'FEMININO']}
+            required
+          />
+          <RadioGroup
+            name='vida.estadoCivil'
+            MMKVKey='vida.estadoCivil'
+            label='ESTADO CIVIL'
+            options={['CASADO(A)', 'SOLTEIRO(A)', 'VIUVO(A)']}
+            required
+          />
+        </View>
+
         <Input
           name='vida.telefone1'
           MMKVKey='vida.telefone1'
@@ -101,9 +104,23 @@ export default function cadastro() {
           label={'Telefone 2'}
           keyboardType='number-pad'
           // rules={{
-          //   minLength: {value: 11, message: 'Número deve ter 11 caracteres'},
+            //   minLength: {value: 11, message: 'Número deve ter 11 caracteres'},
           // }}
           maxLength={11}
+        />
+        <Input
+          name='vida.redeSocial'
+          MMKVKey='vida.redeSocial'
+          label={'REDE SOCIAL'}
+          placeholder='Insira um valor'
+          required
+        />
+        <Input
+          name='vida.email'
+          MMKVKey='vida.email'
+          label={'EMAIL'}
+          placeholder='Insira um valor'
+          required
         />
         <Input
           name='vida.rua'
@@ -133,20 +150,6 @@ export default function cadastro() {
           placeholder='Insira um valor'
           required
         />
-        <Input
-          name='vida.email'
-          MMKVKey='vida.email'
-          label={'EMAIL'}
-          placeholder='Insira um valor'
-          required
-        />
-        <Input
-          name='vida.redeSocial'
-          MMKVKey='vida.redeSocial'
-          label={'REDE SOCIAL'}
-          placeholder='Insira um valor'
-          required
-        />
         <RadioGroup
           name='vida.participaCelula'
           MMKVKey='vida.participaCelula'
@@ -156,13 +159,13 @@ export default function cadastro() {
         />
         {participaCelula === 'SIM' && (
           <Input
-            name='vida.celula'
-            MMKVKey='vida.celula'
-            label={'QUAL A CÉLULA, LÍDER E REDE?'}
-            placeholder='Insira um valor'
-            required
+          name='vida.celula'
+          MMKVKey='vida.celula'
+          label={'QUAL A CÉLULA, LÍDER E REDE?'}
+          placeholder='Insira um valor'
+          required
           />
-        )}
+          )}
         <Input
           name='vida.observacoes'
           MMKVKey='vida.observacoes'
