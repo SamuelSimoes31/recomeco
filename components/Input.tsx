@@ -44,7 +44,7 @@ export default function Input({
         shouldUnregister={shouldUnregister}
         render={({ field: { onChange, onBlur, value } }) => (
           <TextInput
-            outlineStyle={!!error ? {borderColor: theme.colors.error, borderWidth: 3} : undefined}
+            outlineStyle={!!error ? {borderColor: theme.colors.error, borderWidth: 2} : undefined}
             onBlur={onBlur}
             onChangeText={text => {
               if (MMKVKey) {
