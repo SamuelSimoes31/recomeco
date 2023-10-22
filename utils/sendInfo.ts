@@ -65,7 +65,9 @@ export const buildWhatsappMessageUrl = (values: FormContext) => {
 
   let message = ''
   Object.entries(WHATSAPP_MESSAGES_ENTRIES).forEach(([key,value]) => {
-    message = message.concat(encodeURI(`*${value}:* ${flatValues[key]}\n`))
+    if(flatValues[key]){
+      message = message.concat(encodeURI(`*${value}:* ${flatValues[key]}\n`))
+    }
   })
 
   // return 'whatsapp://send?text=' + message + '&phone=' + WHATSAPP_NUMBER
