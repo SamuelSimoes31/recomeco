@@ -2,7 +2,7 @@ import React from 'react';
 import { Alert, View } from 'react-native';
 import { useFormContext } from "react-hook-form";
 import Input from '../../components/Input';
-import { Button } from 'react-native-paper';
+import { Button, Text } from 'react-native-paper';
 import RadioGroup from '../../components/RadioGroup';
 import { FormContext } from '../../hooks/FormContext';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -13,7 +13,7 @@ import { useVidasContext } from '../../hooks/VidasContext';
 export default function cadastro() {
   const router = useRouter();
   const navigation = useNavigation();
-  const { handleSubmit } = useFormContext<FormContext>();
+  const { handleSubmit, formState } = useFormContext<FormContext>();
   const { addVida, cancelVida, idVidaAtual } = useVidasContext();
 
   const onCancel = () => {
@@ -145,6 +145,7 @@ export default function cadastro() {
           label={'OBSERVAÇÕES'}
           placeholder='Insira um valor'
         />
+        {Object.keys(formState.errors)?.length > 0 && <Text variant='bodyMedium'>Verifique as respsotas, algumas contém erros</Text>}
         <Button mode='contained' style={{ marginTop: 24 }} onPress={handleSubmit(onSubmit)} >Salvar</Button>
 
       </View>
