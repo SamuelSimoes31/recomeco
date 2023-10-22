@@ -58,7 +58,7 @@ export default function VidasContextProvider({ children }: { children: React.Rea
     if (idVidaAtual) {
       const listaIds = getVidasListIds();
       listaIds.unshift(idVidaAtual);
-      setVidas(p => [...p, { ...vida, id: idVidaAtual }]);
+      setVidas(p => [{ ...vida, id: idVidaAtual }, ...p]);
 
       storage.set(STORAGE_KEYS.vidas, JSON.stringify(listaIds)); //salvar lista
       storage.set(idVidaAtual, JSON.stringify({ ...vida, id: idVidaAtual })); //salvar dados
