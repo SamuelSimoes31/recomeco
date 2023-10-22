@@ -50,7 +50,7 @@ export const defaultFormValue = {
     telefone1: MMKVGetFormString('vida.telefone1') ??'819',
     telefone2: MMKVGetFormString('vida.telefone2') ??'Não',
     cidade:  MMKVGetFormString('vida.cidade') ?? 'Cabo de St. Agostinho',
-    estadoPais: MMKVGetFormString('vida.estadoPais') ?? 'PE - BRASIL',
+    estadoPais: MMKVGetFormString('vida.estadoPais') ?? 'PE / BRASIL',
     participaCelula: MMKVGetFormString('vida.participaCelula') as any,
     celula: MMKVGetFormString('vida.celula'),
   }
