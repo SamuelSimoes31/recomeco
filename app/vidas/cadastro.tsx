@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Alert, View } from 'react-native';
+import { Alert, Platform, View } from 'react-native';
 import { useFormContext } from "react-hook-form";
 import Input from '../../components/Input';
 import { Button, Text } from 'react-native-paper';
@@ -17,6 +17,8 @@ export default function cadastro() {
   const { addVida, cancelVida, idVidaAtual } = useVidasContext();
   const participaCelula = watch('vida.participaCelula')
 
+  console.log('Platform.OS', Platform.OS)
+
   useEffect(() => {
     if(participaCelula === 'NÃO'){
       setValue('vida.celula', '')
@@ -24,22 +26,29 @@ export default function cadastro() {
   }, [participaCelula])
 
   const onCancel = () => {
-    Alert.alert(
-      'Tem certeza que deseja cancelar?',
-      'Todos os dados serão perdidos!!!',
-      [{
-        text: 'Sim',
-        onPress: () => {
-          cancelVida();
-          router.back()
+    if(Platform.OS !== 'web'){
+      Alert.alert(
+        'Tem certeza que deseja cancelar?',
+        'Todos os dados serão perdidos!!!',
+        [{
+          text: 'Sim',
+          onPress: () => {
+            cancelVida();
+            router.back()
+          }
+        },{
+          text: 'Voltar',
+        }],
+        {
+          cancelable: true
         }
-      },{
-        text: 'Voltar',
-      }],
-      {
-        cancelable: true
+      );
+    } else {
+      if(confirm("Tem certeza que deseja cancelar? Todos os dados serão perdidos!!!")) {
+        cancelVida();
+        router.back()
       }
-    );
+    }
   };
 
   if (!idVidaAtual) return null;
