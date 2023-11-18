@@ -27,7 +27,8 @@
     },
     "scheme": "acme",
     "web": {
-      "bundler": "metro"
+      "bundler": "metro",
+      "output": "single"
     },
     "extra": {
       "eas": {
