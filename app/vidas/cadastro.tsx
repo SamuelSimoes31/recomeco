@@ -17,8 +17,6 @@ export default function cadastro() {
   const { addVida, cancelVida, idVidaAtual } = useVidasContext();
   const participaCelula = watch('vida.participaCelula')
 
-  console.log('Platform.OS', Platform.OS)
-
   useEffect(() => {
     if(participaCelula === 'NÃO'){
       setValue('vida.celula', '')
