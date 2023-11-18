@@ -1,5 +1,5 @@
 import { Stack, useRouter } from 'expo-router';
-import { KeyboardAvoidingView, StyleSheet, View } from "react-native";
+import { KeyboardAvoidingView, StyleSheet, View, Platform } from "react-native";
 import { Button, Card, Text } from 'react-native-paper';
 import { useFormContext } from 'react-hook-form';
 import { FormContext } from '../hooks/FormContext';
@@ -30,7 +30,11 @@ export default function Page() {
         <View style={{ flexDirection: 'row', flex: 1, gap: 16, flexWrap: 'wrap', paddingBottom: 24 }}>
           {CULTOS.map(culto => (
             <Card theme={{ roundness: 2 }} key={culto.nome} onPress={() => onSelect(culto.nome)} style={styles.cardContainer}>
-              <Card.Cover theme={{ roundness: 2 }} resizeMode='contain' source={culto.imagem} />
+              {Platform.OS !== 'web' ? (
+                <Card.Cover theme={{ roundness: 2 }} resizeMode='contain' source={culto.imagem} />
+              ) : (
+                <img src={culto.src} alt=""  style={{borderRadius: 4}}/>
+              )}
               <Card.Content style={{ alignItems: 'center', paddingBottom: 4 }}>
                 <Text variant="titleMedium">{culto.nome}</Text>
               </Card.Content>
