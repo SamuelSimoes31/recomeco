@@ -13,6 +13,7 @@ import { useEffect } from 'react';
 export default function Page() {
   const router = useRouter();
   const { setValue, watch, resetField } = useFormContext<FormContext>();
+  console.log('Platform.OS', Platform.OS)
 
   useEffect(() => {
     setValue('voluntario.culto', '')
@@ -30,11 +31,7 @@ export default function Page() {
         <View style={{ flexDirection: 'row', flex: 1, gap: 16, flexWrap: 'wrap', paddingBottom: 24 }}>
           {CULTOS.map(culto => (
             <Card theme={{ roundness: 2 }} key={culto.nome} onPress={() => onSelect(culto.nome)} style={styles.cardContainer}>
-              {Platform.OS !== 'web' ? (
-                <Card.Cover theme={{ roundness: 2 }} resizeMode='contain' source={culto.imagem} />
-              ) : (
-                <img src={culto.src} alt=""  style={{borderRadius: 4}}/>
-              )}
+              <Card.Cover theme={{ roundness: 2 }} resizeMode='contain' source={culto.imagem} style={{alignItems: Platform.OS === 'web' ? 'center' : undefined }}/>
               <Card.Content style={{ alignItems: 'center', paddingBottom: 4 }}>
                 <Text variant="titleMedium">{culto.nome}</Text>
               </Card.Content>
