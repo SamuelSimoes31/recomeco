@@ -20,7 +20,7 @@ interface FooterButtonsP {
 export default function FooterButtons({ buttons }: FooterButtonsP) {
   const theme = useTheme();
   return (
-    <View style={{ flexDirection: 'row', alignSelf: 'flex-end' }}>
+    <View style={{ flexDirection: 'row', alignSelf: 'flex-end', width: '100%'}}>
       {buttons.map((button, index) => (
         <TouchableRipple
           key={button.title + index}
