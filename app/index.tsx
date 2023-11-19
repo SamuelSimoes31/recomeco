@@ -1,4 +1,4 @@
-import { Stack, useRouter } from 'expo-router';
+import { Link, Stack, useRouter } from 'expo-router';
 import { Image, StyleSheet, View } from "react-native";
 import { Button, Text } from 'react-native-paper';
 import Input from '../components/Input';
@@ -12,16 +12,30 @@ import { useVidasContext } from '../hooks/VidasContext';
 export default function Page() {
   const router = useRouter();
   const { handleSubmit } = useFormContext<FormContext>();
-  const {idVidaAtual} = useVidasContext()
+  const { idVidaAtual } = useVidasContext();
 
   return (
     <View style={[defaultStyles.container, styles.main]}>
-       <Stack.Screen options={{ headerShown: false }} />
-      <View style={{alignItems: 'center', gap: 36, margin: 24}}>
+      <Stack.Screen options={{ headerShown: false }} />
+      <View style={{ alignItems: 'center', gap: 36, margin: 24, marginBottom: 40 }}>
         <Image source={require('../assets/logo-nome.jpeg')} />
+        <View style={{ alignItems: 'center', gap: 10 }}>
+          <Text>versão 1.2.0</Text>
+          <Text>Criado por <Link style={{ color: 'blue', textDecorationLine: 'underline' }} href={'https://wa.me/5581985860368'}>
+            Samuel Simões
+          </Link></Text>
+          <Link style={{ color: 'blue', textDecorationLine: 'underline' }} href={''}>
+            Como utilizar o site?
+          </Link>
+          <Link style={{ color: 'blue', textDecorationLine: 'underline' }} href={'https://expo.dev/artifacts/eas/s51KYJG2AFdwBBEkKNErfR.apk '}>
+            Baixar Aplicativo para Android
+          </Link>
+        </View>
         <Text variant='headlineLarge'>Bem vindo</Text>
       </View>
-      <View style={{marginVertical: 36}}>
+      <View>
+      </View>
+      <View style={{ marginVertical: 36 }}>
         <Input
           name='voluntario.nome'
           label={'Nome do Voluntário'}
@@ -41,7 +55,7 @@ export default function Page() {
       <Button
         mode='contained'
         onPress={handleSubmit(() => {
-          if(idVidaAtual) router.push('/vidas/cadastro')
+          if (idVidaAtual) router.push('/vidas/cadastro');
           else router.push('/vidas');
         })}
       >
