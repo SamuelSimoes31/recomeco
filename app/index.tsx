@@ -23,11 +23,13 @@ export default function Page() {
           <Text>versão 1.2.0</Text>
           <Text>Criado por <Link style={{ color: 'blue', textDecorationLine: 'underline' }} href={'https://wa.me/5581985860368'}>
             Samuel Simões
-          </Link></Text>
+          </Link>
+            <Text style={{ fontSize: 12 }}>{`\nDúvidas, problemas ou sugestões.\nPor favor, comunique.`}</Text>
+          </Text>
           <Link style={{ color: 'blue', textDecorationLine: 'underline' }} href={'https://expo.dev/artifacts/eas/s51KYJG2AFdwBBEkKNErfR.apk '}>
             Baixar Aplicativo para Android
           </Link>
-          <Link style={{ color: 'blue', textDecorationLine: 'underline' }} href={''}>
+          <Link style={{ color: 'blue', textDecorationLine: 'underline' }} href={'https://youtu.be/fY1ONrJqvtI?si=mXad92tPknCLt1DJ'}>
             Como utilizar o site?
           </Link>
         </View>
