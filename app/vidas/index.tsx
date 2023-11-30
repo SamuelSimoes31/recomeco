@@ -34,7 +34,9 @@ export default function Page() {
       <ScrollView style={{flex: 1}}>
         <View style={[defaultStyles.container, {justifyContent: 'flex-end', gap: 8}]}>
           <Stack.Screen options={{ title: "Vidas" }} />
-          <Text style={{alignSelf: 'center'}}>Lembrar de apertar os dois botões</Text>
+          {vidas.length > 0 && (
+            <Text style={{alignSelf: 'center'}}>Lembrar de apertar os dois botões</Text>
+          )}
           <View style={{gap: 8}}>
             {vidas.map(v => (
               <Card key={v.id}>
