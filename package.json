@@ -4,7 +4,11 @@
     "android": "expo run:android",
     "ios": "expo run:ios",
     "web": "expo start --web",
-    "build-apk": "eas build -p android --profile preview"
+    "build-apk": "eas build -p android --profile preview",
+    "build-web": "npx expo export -p web",
+    "preview": "npx serve dist --single",
+    "web-workflow": "yarn build-web && yarn preview",
+    "deploy": "netlify deploy --dir dist"
   },
   "dependencies": {
     "@types/react": "~18.0.27",
