@@ -54,7 +54,7 @@ export const buildFormURL = (values: FormContext) => {
 
   let entries = ''
   Object.entries(flatValues).forEach(([key,value]) => {
-    entries = entries.concat(`&entry.${GOOGLE_FORM_ENTRIES[key]}=${encodeURI(value as string)}`)
+    if(value) entries = entries.concat(`&entry.${GOOGLE_FORM_ENTRIES[key]}=${encodeURI(value as string)}`)
   })
 
   return RECOMECO_FORM_URL + entries + `&entry.${GOOGLE_FORM_ENTRIES['CONVERSAO']}=${encodeURI('PRESENCIAL')}`
@@ -62,7 +62,6 @@ export const buildFormURL = (values: FormContext) => {
 
 
 export const buildWhatsappMessageUrl = (values: FormContext) => {
-  console.log(values)
   const flatValues = flattenObject(values)
 
   let message = ''
