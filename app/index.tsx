@@ -26,9 +26,6 @@ export default function Page() {
           </Link>
             <Text style={{ fontSize: 12 }}>{`\nDúvidas, problemas ou sugestões.\nPor favor, comunique.`}</Text>
           </Text>
-          <Link style={{ color: 'blue', textDecorationLine: 'underline' }} href={'https://expo.dev/artifacts/eas/s51KYJG2AFdwBBEkKNErfR.apk '}>
-            Baixar Aplicativo para Android
-          </Link>
           <Link style={{ color: 'blue', textDecorationLine: 'underline' }} href={'https://youtu.be/fY1ONrJqvtI?si=mXad92tPknCLt1DJ'}>
             Como utilizar o site?
           </Link>
