@@ -8,7 +8,8 @@
     "build-web": "npx expo export -p web",
     "preview": "npx serve dist --single",
     "web-workflow": "yarn build-web && yarn preview",
-    "deploy": "netlify deploy --dir dist"
+    "deploy": "netlify deploy --dir dist",
+    "deploy-prod": "netlify deploy --prod"
   },
   "dependencies": {
     "@types/react": "~18.0.27",
