@@ -23,6 +23,9 @@ export interface FormContext {
     participaCelula: string
     celula: string
     observacoes: string
+    primeiraConversao: string
+    reconciliacao: string
+    antigaIgreja: string
   }
   id: string
   acoes?: {

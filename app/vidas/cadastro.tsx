@@ -16,12 +16,19 @@ export default function cadastro() {
   const { handleSubmit, formState, watch, setValue } = useFormContext<FormContext>();
   const { addVida, cancelVida, idVidaAtual } = useVidasContext();
   const participaCelula = watch('vida.participaCelula')
+  const reconciliacao = watch('vida.reconciliacao')
 
   useEffect(() => {
     if(participaCelula === 'NÃO'){
       setValue('vida.celula', '')
     }
   }, [participaCelula])
+
+  useEffect(() => {
+    if(reconciliacao === 'NÃO'){
+      setValue('vida.antigaIgreja', '')
+    }
+  }, [reconciliacao])
 
   const onCancel = () => {
     if(Platform.OS !== 'web'){
@@ -169,6 +176,29 @@ export default function cadastro() {
           name='vida.celula'
           MMKVKey='vida.celula'
           label={'QUAL A CÉLULA, LÍDER E REDE?'}
+          placeholder='Insira um valor'
+          required
+          />
+          )}
+        <RadioGroup
+          name='vida.primeiraConversao'
+          MMKVKey='vida.primeiraConversao'
+          label='PRIMEIRA CONVERSÃO?'
+          options={['SIM', 'NÃO']}
+          required
+        />
+        <RadioGroup
+          name='vida.reconciliacao'
+          MMKVKey='vida.reconciliacao'
+          label='RECONCILIAÇÃO? (Voltando para Jesus)'
+          options={['SIM', 'NÃO']}
+          required
+        />
+        {reconciliacao === 'SIM' && (
+          <Input
+          name='vida.antigaIgreja'
+          MMKVKey='vida.antigaIgreja'
+          label={'ERA DE QUAL IGREJA?'}
           placeholder='Insira um valor'
           required
           />

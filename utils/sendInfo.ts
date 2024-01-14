@@ -1,28 +1,33 @@
-import { FormContext } from '../hooks/FormContext';
+import { FormContext } from '../hooks/FormContext'
 
 
 //export const GOOGLE_FORM_ENTRIES :Record<Exclude<FieldPathByValue<FormContext, string>, 'id'>,number> = {
-export const GOOGLE_FORM_ENTRIES :Record<string,number> = {
-  'vida.nome': 1981735571,
-  'vida.idade': 978933836,
-  'vida.sexo': 1505175568,
-  'vida.estadoCivil': 550843938,
-  'vida.telefone1': 1687686240,
-  'vida.telefone2': 1640386025,
-  'vida.rua': 1252938284,
-  'vida.bairro': 1316404051,
-  'vida.cidade': 224229620,
-  'vida.email': 390493169,
-  'vida.redeSocial': 1531927057,
-  'vida.celula': 1016897638,
-  'voluntario.culto': 26503110,
-  'voluntario.nome': 1038554481,
-  'vida.observacoes': 474898689,
-  'voluntario.campus': 26503110,
-  'CONVERSAO': 691748290,
+export const GOOGLE_FORM_ENTRIES: Record<string, number> = {
+  'vida.nome': 2005620554,
+  'vida.idade': 1065046570,
+  'vida.sexo': 1166974658,
+  'vida.estadoCivil': 1045781291,
+  'vida.telefone1': 1974093124,
+  'vida.telefone2': 1700597708,
+  'vida.rua': 773746128,
+  'vida.bairro': 225051009,
+  'vida.cidade': 1099749443,
+  'vida.email': 1453591276,
+  'vida.redeSocial': 1032433154,
+  'vida.celula': 1813669429,
+  'vida.estadoPais': 1452519748,
+  'vida.participaCelula': 531175026,
+  'voluntario.culto': 886065548,
+  'voluntario.nome': 1662748463,
+  'vida.observacoes': 1879273873,
+  'voluntario.campus': 886065548,
+  'vida.primeiraConversao': 1485377681,
+  'vida.reconciliacao': 2067122527,
+  'vida.antigaIgreja': 990716761,
+  'CONVERSAO': 839337160,
 }
 
-export const WHATSAPP_MESSAGES_ENTRIES :Record<string,string> = {
+export const WHATSAPP_MESSAGES_ENTRIES: Record<string, string> = {
   'vida.nome': 'Nome',
   'vida.idade': 'Idade',
   'vida.sexo': 'Sexo',
@@ -37,15 +42,18 @@ export const WHATSAPP_MESSAGES_ENTRIES :Record<string,string> = {
   'vida.estadoPais': 'Estado/Pais',
   'vida.participaCelula': 'Participa de célula',
   'vida.celula': 'Célula',
+  'vida.primeiraConversao': 'Primeira conversão',
+  'vida.reconciliacao': 'Reconciliação',
+  'vida.antigaIgreja': 'Antiga igreja',
   'vida.observacoes': 'Observações',
   'voluntario.campus': 'Campus',
   'voluntario.culto': 'Culto',
   'voluntario.nome': 'Voluntário',
 }
 
-const RECOMECO_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSer9CgfTH3HjEdHlVUauC9LH6EeCOhIBaNq8NVGwh3WrVagFw/viewform?usp=pp_url'
+const RECOMECO_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSerGoKRijPIOFJx2pE43rZNToQbhHiPDvptNZ0YOndSIrYMFQ/viewform?mode=html'
 
-const WHATSAPP_NUMBER = '5581985860368'
+const WHATSAPP_NUMBER = '5581986176839'
 
 export const buildFormURL = (values: FormContext) => {
   const flatValues = flattenObject(values)
@@ -53,8 +61,8 @@ export const buildFormURL = (values: FormContext) => {
   delete flatValues['voluntario.culto']
 
   let entries = ''
-  Object.entries(flatValues).forEach(([key,value]) => {
-    if(value) entries = entries.concat(`&entry.${GOOGLE_FORM_ENTRIES[key]}=${encodeURI(value as string)}`)
+  Object.entries(flatValues).forEach(([key, value]) => {
+    if (value) entries = entries.concat(`&entry.${GOOGLE_FORM_ENTRIES[key]}=${encodeURI(value as string)}`)
   })
 
   return RECOMECO_FORM_URL + entries + `&entry.${GOOGLE_FORM_ENTRIES['CONVERSAO']}=${encodeURI('PRESENCIAL')}`
@@ -65,8 +73,8 @@ export const buildWhatsappMessageUrl = (values: FormContext) => {
   const flatValues = flattenObject(values)
 
   let message = ''
-  Object.entries(WHATSAPP_MESSAGES_ENTRIES).forEach(([key,value]) => {
-    if(flatValues[key]){
+  Object.entries(WHATSAPP_MESSAGES_ENTRIES).forEach(([key, value]) => {
+    if (flatValues[key]) {
       message = message.concat(encodeURI(`*${value}:* ${flatValues[key]}\n`))
     }
   })
@@ -77,8 +85,8 @@ export const buildWhatsappMessageUrl = (values: FormContext) => {
 
 const flattenObject = (obj: any, prefix = '') =>
   Object.keys(obj).reduce((acc: any, k) => {
-    const pre = prefix.length ? prefix + '.' : '';
-    if (typeof obj[k] === 'object') Object.assign(acc, flattenObject(obj[k], pre + k));
-    else acc[pre + k] = obj[k];
-    return acc;
-  }, {});
+    const pre = prefix.length ? prefix + '.' : ''
+    if (typeof obj[k] === 'object') Object.assign(acc, flattenObject(obj[k], pre + k))
+    else acc[pre + k] = obj[k]
+    return acc
+  }, {})
