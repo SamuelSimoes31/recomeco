@@ -83,23 +83,20 @@ export default function cadastro() {
           required
           keyboardType='number-pad'
         />
-        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-          <RadioGroup
-            name='vida.sexo'
-            MMKVKey='vida.sexo'
-            label='SEXO'
-            options={['MASCULINO', 'FEMININO']}
-            required
-          />
-          <RadioGroup
-            name='vida.estadoCivil'
-            MMKVKey='vida.estadoCivil'
-            label='ESTADO CIVIL'
-            options={['CASADO(A)', 'SOLTEIRO(A)', 'VIUVO(A)']}
-            required
-          />
-        </View>
-
+        <RadioGroup
+          name='vida.sexo'
+          MMKVKey='vida.sexo'
+          label='SEXO'
+          options={['MASCULINO', 'FEMININO']}
+          required
+        />
+        <RadioGroup
+          name='vida.estadoCivil'
+          MMKVKey='vida.estadoCivil'
+          label='ESTADO CIVIL'
+          options={['CASADO(A)', 'SOLTEIRO(A)', 'VIUVO(A)']}
+          required
+        />
         <Input
           name='vida.telefone1'
           MMKVKey='vida.telefone1'
